@@ -126,6 +126,12 @@
               "api-reference/payments/verify",
               "api-reference/dashboard/packages"
             ]
+          },
+          {
+            "group": "Tools",
+            "pages": [
+              "api-reference/tools/url-shortener"
+            ]
           }
         ]
       }
