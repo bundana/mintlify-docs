@@ -181,12 +181,11 @@
   "openapi": "api-reference/openapi.json",
   "footer": {
     "socials": {
-      "facebook": "https://facebook.com/sendazi",
-      "instagram": "https://instagram.com/sendazi",
-      "youtube": "https://youtube.com/sendazi",
-      "linkedin": "https://linkedin.com/company/sendazi",
-      "github": "https://github.com/sendazi",
-      "x-twitter": "https://x.com/sendazi"
+      "facebook": "https://facebook.com/sirateq",
+      "instagram": "https://instagram.com/sirateqgh",
+      "linkedin": "https://linkedin.com/company/sirateq",
+      "github": "https://github.com/sirateq",
+      "x-twitter": "https://x.com/sirateqgh"
     }
   }
 }
