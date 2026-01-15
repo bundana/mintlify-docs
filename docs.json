@@ -175,7 +175,12 @@
       "name": "Authorization"
     },
     "playground": {
-      "mode": "simple"
+      "display": "interactive"
+    },
+    "examples": {
+      "languages": ["curl", "php", "python", "javascript", "java", "nodejs", "ruby"],
+      "defaults": "required",
+      "prefill": true
     }
   },
   "openapi": "api-reference/openapi.json",
