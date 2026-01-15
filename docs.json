@@ -175,7 +175,8 @@
       "name": "Authorization"
     },
     "playground": {
-      "display": "interactive"
+      "mode": "simple",
+      "proxy": false
     },
     "examples": {
       "languages": ["curl", "php", "python", "javascript", "java", "nodejs", "ruby"],
