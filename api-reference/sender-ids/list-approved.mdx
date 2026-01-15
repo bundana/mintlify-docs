@@ -1,0 +1,32 @@
+---
+title: "List Approved Sender IDs"
+api: "GET /all-sender-ids"
+description: "Returns all approved sender IDs as a simple array"
+---
+
+<Tip>
+  This endpoint returns a simple array of sender ID names—perfect for populating dropdowns and select fields in your application.
+</Tip>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": [
+    "MYCOMPANY",
+    "ALERTS",
+    "PROMO"
+  ]
+}
+```
+</ResponseExample>
+
+## Use Cases
+
+- Populating a sender ID dropdown in your UI
+- Quick validation of available sender IDs
+- Building campaign creation forms
+
+<Note>
+  For detailed sender ID information (status, purpose, dates), use the [List Sender IDs](/api-reference/sender-ids/list) endpoint instead.
+</Note>

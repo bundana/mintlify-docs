@@ -1,0 +1,47 @@
+---
+title: "Verify Payment"
+api: "POST /payments/verify/{reference}"
+description: "Verify a payment transaction"
+---
+
+<ParamField path="reference" type="string" required>
+  The payment transaction reference
+</ParamField>
+
+<Note>
+  Call this endpoint after a successful payment to verify and credit your account.
+</Note>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": {
+    "status": "success",
+    "amount": 500.00,
+    "credits_added": 2500,
+    "reference": "TXN_1767234120056_zetjslzfe",
+    "verified_at": "2026-01-15T16:00:00.000000Z"
+  },
+  "message": "Payment verified successfully. Credits have been added to your account."
+}
+```
+
+```json 400 - Failed Verification
+{
+  "success": false,
+  "message": "Payment verification failed. Please contact support if you believe this is an error."
+}
+```
+
+```json 400 - Already Verified
+{
+  "success": false,
+  "message": "This payment has already been verified."
+}
+```
+</ResponseExample>
+
+<Warning>
+  **Coming Soon:** We are working on implementing credit purchases and top-ups directly via the API. Stay tuned for updates!
+</Warning>

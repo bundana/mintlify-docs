@@ -1,0 +1,115 @@
+---
+title: "Campaigns"
+description: "Learn how to create and manage SMS and Voice campaigns"
+---
+
+## Overview
+
+Campaigns are the core of Sendazi. They allow you to send messages to your contacts, either immediately or on a schedule.
+
+## Campaign Types
+
+<CardGroup cols={2}>
+  <Card title="SMS Campaigns" icon="message">
+    Send text messages to your contacts. Perfect for promotions, notifications, and alerts.
+  </Card>
+  <Card title="Voice Campaigns" icon="phone">
+    Send automated voice calls with custom audio files or text-to-speech messages.
+  </Card>
+</CardGroup>
+
+## Creating a Campaign
+
+### 1. Choose Recipients
+
+You have two options for selecting recipients:
+
+- **Direct Phone Numbers**: Specify a list of phone numbers directly
+- **Contact Groups**: Select one or more groups from your contacts
+
+<Note>
+  Phone numbers can be in international format (e.g., `233241234567`), local format (e.g., `0241234567`), or with a plus prefix (e.g., `+233241234567`). Local numbers are automatically converted to international format.
+</Note>
+
+### 2. Select a Sender ID
+
+Choose an approved sender ID that will appear as the sender of your messages. You can manage your sender IDs in the dashboard or via the API.
+
+### 3. Compose Your Message
+
+Write your message content. You can use placeholders for personalization:
+
+| Placeholder | Description |
+|------------|-------------|
+| `[First Name]` | Contact's first name |
+| `[Last Name]` | Contact's last name |
+| `[Phone Number]` | Contact's phone number |
+
+**Example:**
+
+```
+Hello [First Name]! Thank you for being a valued customer.
+```
+
+### 4. Schedule (Optional)
+
+You can send your campaign immediately or schedule it for later:
+
+```json
+{
+  "scheduled_at": "2026-01-20 09:00:00"
+}
+```
+
+### 5. Set Up Recurring (Optional)
+
+For regular communications, you can set up recurring campaigns:
+
+```json
+{
+  "is_recurring": true,
+  "recurrence_frequency": "weekly",
+  "recurrence_interval": 1,
+  "recurrence_ends_at": "2026-12-31 23:59:59"
+}
+```
+
+## Campaign Statuses
+
+| Status | Description |
+|--------|-------------|
+| `pending` | Campaign is queued and waiting to be processed |
+| `processing` | Campaign is currently being sent |
+| `completed` | All messages have been sent |
+| `failed` | Campaign failed to send |
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Personalize Your Messages">
+    Use placeholders to make your messages more personal. Personalized messages have higher engagement rates.
+  </Accordion>
+  
+  <Accordion title="Test Before Sending">
+    Always send a test campaign to yourself before launching to your full audience.
+  </Accordion>
+  
+  <Accordion title="Mind the Timing">
+    Consider your audience's timezone when scheduling campaigns. Avoid sending messages too early or too late.
+  </Accordion>
+  
+  <Accordion title="Keep Messages Concise">
+    SMS messages are limited to 160 characters for a single segment. Longer messages will be split and may cost more credits.
+  </Accordion>
+</AccordionGroup>
+
+## API Reference
+
+<CardGroup cols={2}>
+  <Card title="SMS Campaigns API" icon="code" href="/api-reference/sms-campaigns/list">
+    Create and manage SMS campaigns via API
+  </Card>
+  <Card title="Voice Campaigns API" icon="code" href="/api-reference/voice-campaigns/list">
+    Create and manage voice campaigns via API
+  </Card>
+</CardGroup>

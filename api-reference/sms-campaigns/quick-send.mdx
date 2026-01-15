@@ -1,0 +1,116 @@
+---
+title: "Quick Send SMS"
+api: "GET /sms-campaigns/quick"
+description: "Send a single SMS instantly using a simple GET request"
+---
+
+The Quick Send endpoint is the easiest way to send an SMS. Simply make a GET request with query parameters—perfect for transactional messages, alerts, and simple integrations.
+
+<ParamField query="to" type="string" required>
+  Recipient phone number (international, local, or with + prefix)
+</ParamField>
+
+<ParamField query="message" type="string" required>
+  The message content to send (URL encoded)
+</ParamField>
+
+<ParamField query="sender_id" type="string" required>
+  Your approved sender ID
+</ParamField>
+
+<ParamField query="api_key" type="string" required>
+  Your API key (use this instead of Bearer token for GET requests)
+</ParamField>
+
+<Note>
+  For Quick Send, pass your API key as a query parameter instead of using the Authorization header.
+</Note>
+
+<RequestExample>
+```bash cURL
+curl "https://sendazi.com/api/v1/sms-campaigns/quick?to=233241234567&message=Hello%20from%20Sendazi!&sender_id=MYCOMPANY&api_key=YOUR_API_KEY"
+```
+
+```javascript Browser/Node.js
+const params = new URLSearchParams({
+  to: '233241234567',
+  message: 'Hello from Sendazi!',
+  sender_id: 'MYCOMPANY',
+  api_key: 'YOUR_API_KEY'
+});
+
+fetch(`https://sendazi.com/api/v1/sms-campaigns/quick?${params}`)
+  .then(res => res.json())
+  .then(console.log);
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    'https://sendazi.com/api/v1/sms-campaigns/quick',
+    params={
+        'to': '233241234567',
+        'message': 'Hello from Sendazi!',
+        'sender_id': 'MYCOMPANY',
+        'api_key': 'YOUR_API_KEY'
+    }
+)
+print(response.json())
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "message": "SMS campaign created successfully",
+  "data": {
+    "campaign_id": "d02628f5-c30b-4f7d-9a76-da4636ee4af9",
+    "status": "sent",
+    "network": "MTN",
+    "scheduled_at": null
+  }
+}
+```
+
+```json 400 - Insufficient Balance
+{
+  "success": false,
+  "message": "Insufficient balance. Please top up your account."
+}
+```
+
+```json 401 - Invalid API Key
+{
+  "success": false,
+  "message": "Invalid API key."
+}
+```
+
+```json 422 - Validation Error
+{
+  "success": false,
+  "message": "The given data was invalid.",
+  "errors": {
+    "to": ["The to field is required."],
+    "message": ["The message field is required."]
+  }
+}
+```
+</ResponseExample>
+
+## When to Use Quick Send
+
+| Use Case | Recommended Method |
+|----------|-------------------|
+| Single transactional SMS | ✅ Quick Send |
+| OTP/verification codes | ✅ Quick Send |
+| Simple alerts | ✅ Quick Send |
+| Bulk messaging | ❌ Use Campaign API |
+| Scheduled messages | ❌ Use Campaign API |
+| Recurring campaigns | ❌ Use Campaign API |
+
+<Tip>
+  Quick Send is ideal for developers who want to integrate SMS without complex setup. Just construct a URL and make a request!
+</Tip>

@@ -1,0 +1,29 @@
+---
+title: "List Bundle History"
+api: "GET /user/bundle-history"
+description: "Retrieve the history of purchased credit bundles"
+---
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "package_name": "Premium Bundle",
+      "credits": 5000,
+      "amount": 400.00,
+      "created_at": "2026-01-05T00:00:00.000000Z"
+    },
+    {
+      "id": 2,
+      "package_name": "Starter Bundle",
+      "credits": 1000,
+      "amount": 100.00,
+      "created_at": "2026-01-01T00:00:00.000000Z"
+    }
+  ]
+}
+```
+</ResponseExample>

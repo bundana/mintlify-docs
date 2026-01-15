@@ -1,80 +1,308 @@
 ---
 title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+description: "Start sending SMS and Voice campaigns in minutes"
 ---
 
-## Get started in three steps
+## Prerequisites
 
-Get your documentation site running locally and make your first customization.
+Before you begin, make sure you have:
+- A Sendazi account ([Sign up here](https://sendazi.com))
+- An API key from your dashboard
+- At least one approved sender ID
 
-### Step 1: Set up your local environment
+## Authentication
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+All API requests require authentication using a Bearer token. Include your API key in the `Authorization` header:
 
-### Step 2: Deploy your changes
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+## Step 1: Get Your API Key
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+<Steps>
+  <Step title="Log in to your dashboard">
+    Go to [sendazi.com/settings/profile](https://sendazi.com/settings/profile) and sign in to your account.
+  </Step>
+  <Step title="Navigate to API Keys">
+    Click on **Settings** in the sidebar, then select **Manage Account**.
+  </Step>
+  <Step title="Generate a new key">
+    Click the **Generate API Key** button. Copy and store your key securely—it won't be shown again.
+  </Step>
+</Steps>
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
+<Warning>
+  Keep your API key secure. Never expose it in client-side code or public repositories.
+</Warning>
 
-### Step 3: Go live
+## Step 2: Check Your Balance (Optional)
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+You can check your account balance before sending campaigns. This step is optional—if your account has insufficient credits, the API will return an error when you try to send.
 
-## Next steps
+<CodeGroup>
+```bash cURL
+curl -X GET "https://sendazi.com/api/v1/user/balance" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
 
-Now that you have your docs running, explore these key features:
+```javascript Node.js
+const response = await fetch('https://sendazi.com/api/v1/user/balance', {
+  method: 'GET',
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+  }
+});
+
+const data = await response.json();
+console.log(data);
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    'https://sendazi.com/api/v1/user/balance',
+    headers={
+        'Authorization': 'Bearer YOUR_API_KEY',
+        'Content-Type': 'application/json'
+    }
+)
+
+print(response.json())
+```
+
+```php PHP
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+    CURLOPT_URL => 'https://sendazi.com/api/v1/user/balance',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HTTPHEADER => [
+        'Authorization: Bearer YOUR_API_KEY',
+        'Content-Type: application/json'
+    ]
+]);
+
+$response = curl_exec($curl);
+curl_close($curl);
+
+echo $response;
+```
+</CodeGroup>
+
+## Step 3: Send Your First SMS
+
+There are two ways to send SMS messages: **Quick Send** (simple GET request) or **Campaign API** (full-featured POST request).
+
+### Option A: Quick Send (Simplest)
+
+The fastest way to send a single SMS—just make a GET request with query parameters:
+
+```
+https://sendazi.com/api/v1/sms-campaigns/quick?to=PHONE_NUMBER&message=YOUR_MESSAGE&sender_id=YOUR_SENDER_ID&api_key=YOUR_API_KEY
+```
+
+<CodeGroup>
+```bash cURL
+curl "https://sendazi.com/api/v1/sms-campaigns/quick?to=233241234567&message=Hello%20from%20Sendazi!&sender_id=YOUR_SENDER_ID&api_key=YOUR_API_KEY"
+```
+
+```javascript Node.js
+const params = new URLSearchParams({
+  to: '233241234567',
+  message: 'Hello from Sendazi!',
+  sender_id: 'YOUR_SENDER_ID',
+  api_key: 'YOUR_API_KEY'
+});
+
+const response = await fetch(`https://sendazi.com/api/v1/sms-campaigns/quick?${params}`);
+const data = await response.json();
+console.log(data);
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    'https://sendazi.com/api/v1/sms-campaigns/quick',
+    params={
+        'to': '233241234567',
+        'message': 'Hello from Sendazi!',
+        'sender_id': 'YOUR_SENDER_ID',
+        'api_key': 'YOUR_API_KEY'
+    }
+)
+
+print(response.json())
+```
+
+```php PHP
+$params = http_build_query([
+    'to' => '233241234567',
+    'message' => 'Hello from Sendazi!',
+    'sender_id' => 'YOUR_SENDER_ID',
+    'api_key' => 'YOUR_API_KEY'
+]);
+
+$response = file_get_contents("https://sendazi.com/api/v1/sms-campaigns/quick?{$params}");
+echo $response;
+```
+</CodeGroup>
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "message": "SMS campaign created successfully",
+  "data": {
+    "campaign_id": "d02628f5-c30b-4f7d-9a76-da4636ee4af9",
+    "status": "sent",
+    "network": "MTN",
+    "scheduled_at": null
+  }
+}
+```
+
+<Tip>
+  Quick Send is perfect for transactional messages, alerts, and simple integrations where you need to send a single SMS quickly.
+</Tip>
+
+### Option B: Campaign API (Full-Featured)
+
+For bulk messaging, scheduling, and recurring campaigns, use the full Campaign API:
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://sendazi.com/api/v1/sms-campaigns" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "My First Campaign",
+    "recipients": ["233241234567", "233501234567"],
+    "sender_id": "YOUR_SENDER_ID",
+    "message": "Hello! This is a test message from Sendazi."
+  }'
+```
+
+```javascript Node.js
+const response = await fetch('https://sendazi.com/api/v1/sms-campaigns', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: 'My First Campaign',
+    recipients: ['233241234567', '233501234567'],
+    sender_id: 'YOUR_SENDER_ID',
+    message: 'Hello! This is a test message from Sendazi.'
+  })
+});
+
+const data = await response.json();
+console.log(data);
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    'https://sendazi.com/api/v1/sms-campaigns',
+    headers={
+        'Authorization': 'Bearer YOUR_API_KEY',
+        'Content-Type': 'application/json'
+    },
+    json={
+        'name': 'My First Campaign',
+        'recipients': ['233241234567', '233501234567'],
+        'sender_id': 'YOUR_SENDER_ID',
+        'message': 'Hello! This is a test message from Sendazi.'
+    }
+)
+
+print(response.json())
+```
+
+```php PHP
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+    CURLOPT_URL => 'https://sendazi.com/api/v1/sms-campaigns',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_POST => true,
+    CURLOPT_HTTPHEADER => [
+        'Authorization: Bearer YOUR_API_KEY',
+        'Content-Type: application/json'
+    ],
+    CURLOPT_POSTFIELDS => json_encode([
+        'name' => 'My First Campaign',
+        'recipients' => ['233241234567', '233501234567'],
+        'sender_id' => 'YOUR_SENDER_ID',
+        'message' => 'Hello! This is a test message from Sendazi.'
+    ])
+]);
+
+$response = curl_exec($curl);
+curl_close($curl);
+
+echo $response;
+```
+</CodeGroup>
+
+## Step 4: Schedule a Campaign (Optional)
+
+You can schedule campaigns to be sent at a specific time:
+
+```json
+{
+  "name": "Scheduled Campaign",
+  "recipients": ["233241234567"],
+  "sender_id": "YOUR_SENDER_ID",
+  "message": "This is a scheduled message!",
+  "scheduled_at": "2026-01-15 14:30:00"
+}
+```
+
+## Step 5: Set Up Recurring Campaigns (Optional)
+
+For regular communications, set up recurring campaigns:
+
+```json
+{
+  "name": "Weekly Newsletter",
+  "group_ids": ["your-group-uuid"],
+  "sender_id": "YOUR_SENDER_ID",
+  "message": "Weekly update from our team!",
+  "is_recurring": true,
+  "recurrence_frequency": "weekly",
+  "recurrence_interval": 1,
+  "recurrence_ends_at": "2026-12-31 23:59:59"
+}
+```
+
+## Next Steps
+
+Now that you've sent your first campaign, explore more features:
 
 <CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
+  <Card title="Manage Contacts" icon="users" href="/api-reference/contacts/list">
+    Import and organize your contacts into groups.
+  </Card>
+  <Card title="Create Templates" icon="file-lines" href="/api-reference/message-templates/create">
+    Build reusable message templates with placeholders.
+  </Card>
+  <Card title="Voice Campaigns" icon="phone" href="/api-reference/voice-campaigns/create">
+    Reach your audience with voice broadcasts.
+  </Card>
+  <Card title="View Analytics" icon="chart-line" href="/api-reference/dashboard/stats">
+    Track campaign performance and metrics.
+  </Card>
 </CardGroup>
 
 <Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
+  **Need help?** Contact our support team at [support@sendazi.com](mailto:support@sendazi.com) or visit our [API Reference](/api-reference/introduction) for detailed documentation.
 </Note>

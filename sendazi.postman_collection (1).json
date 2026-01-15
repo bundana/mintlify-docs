@@ -1,0 +1,1289 @@
+{
+	"info": {
+		"_postman_id": "1e259989-7c2d-473b-bc34-829a25fd1716",
+		"name": "sendazi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50989366",
+		"_collection_link": "https://sirateqghana-3612823.postman.co/workspace/Sirateq-Ghana's-Workspace~af67122e-f40c-4efb-8d2a-830a49c85c1c/collection/50989366-1e259989-7c2d-473b-bc34-829a25fd1716?action=share&source=collection_link&creator=50989366"
+	},
+	"item": [
+		{
+			"name": "sms-campaigns",
+			"item": [
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/sms-campaigns",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sms-campaigns"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SITE_URL}}/api/v1/sms-campaigns",
+									"host": [
+										"{{SITE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"sms-campaigns"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "172.20.10.4:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 Jan 2026 19:39:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"current_page\": 1,\n        \"data\": [\n            {\n                \"id\": 3,\n                \"user_id\": 3,\n                \"organization_id\": null,\n                \"uuid\": \"c6c2f78c-fd96-4c46-806b-f42db252d67d\",\n                \"name\": \"test\",\n                \"total_recipients\": 1,\n                \"messages_sent\": 0,\n                \"credits_used\": \"0.00\",\n                \"sender_id_id\": 1,\n                \"sender_id\": \"SIRATEQ GH\",\n                \"created_at\": \"2026-01-01T01:37:19.000000Z\",\n                \"updated_at\": \"2026-01-01T01:37:25.000000Z\",\n                \"deleted_at\": null,\n                \"scheduled_at\": null,\n                \"status\": \"failed\",\n                \"is_recurring\": 0,\n                \"recurrence_frequency\": \"daily\",\n                \"recurrence_interval\": 1,\n                \"recurrence_ends_at\": null,\n                \"provider_name\": null,\n                \"speed_per_sec\": null,\n                \"elapsed_seconds\": null,\n                \"elapsed_time\": null,\n                \"estimated_seconds_left\": null,\n                \"estimated_time_left\": null,\n                \"started_at\": null,\n                \"ended_at\": \"2026-01-01 01:37:25\"\n            },\n            {\n                \"id\": 2,\n                \"user_id\": 3,\n                \"organization_id\": null,\n                \"uuid\": \"8c70dca9-3219-4bf5-9ed9-d0a263ea7be6\",\n                \"name\": \"test\",\n                \"total_recipients\": 1,\n                \"messages_sent\": 0,\n                \"credits_used\": \"0.00\",\n                \"sender_id_id\": 1,\n                \"sender_id\": \"SIRATEQ GH\",\n                \"created_at\": \"2026-01-01T01:30:35.000000Z\",\n                \"updated_at\": \"2026-01-01T01:30:43.000000Z\",\n                \"deleted_at\": null,\n                \"scheduled_at\": null,\n                \"status\": \"failed\",\n                \"is_recurring\": 0,\n                \"recurrence_frequency\": \"daily\",\n                \"recurrence_interval\": 1,\n                \"recurrence_ends_at\": null,\n                \"provider_name\": null,\n                \"speed_per_sec\": null,\n                \"elapsed_seconds\": null,\n                \"elapsed_time\": null,\n                \"estimated_seconds_left\": null,\n                \"estimated_time_left\": null,\n                \"started_at\": null,\n                \"ended_at\": \"2026-01-01 01:30:43\"\n            },\n            {\n                \"id\": 1,\n                \"user_id\": 3,\n                \"organization_id\": null,\n                \"uuid\": \"cdf9beda-5ca7-4288-8d95-e7e42316b148\",\n                \"name\": \"tes\",\n                \"total_recipients\": 1,\n                \"messages_sent\": 0,\n                \"credits_used\": \"0.00\",\n                \"sender_id_id\": 1,\n                \"sender_id\": \"SIRATEQ GH\",\n                \"created_at\": \"2025-12-31T21:51:46.000000Z\",\n                \"updated_at\": \"2026-01-01T01:29:20.000000Z\",\n                \"deleted_at\": null,\n                \"scheduled_at\": null,\n                \"status\": \"pending\",\n                \"is_recurring\": 0,\n                \"recurrence_frequency\": \"daily\",\n                \"recurrence_interval\": 1,\n                \"recurrence_ends_at\": null,\n                \"provider_name\": null,\n                \"speed_per_sec\": null,\n                \"elapsed_seconds\": null,\n                \"elapsed_time\": null,\n                \"estimated_seconds_left\": null,\n                \"estimated_time_left\": null,\n                \"started_at\": \"2026-01-01 01:29:20\",\n                \"ended_at\": null\n            }\n        ],\n        \"first_page_url\": \"http://172.20.10.4:8000/api/v1/sms-campaigns?page=1\",\n        \"from\": 1,\n        \"last_page\": 1,\n        \"last_page_url\": \"http://172.20.10.4:8000/api/v1/sms-campaigns?page=1\",\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"page\": null,\n                \"active\": false\n            },\n            {\n                \"url\": \"http://172.20.10.4:8000/api/v1/sms-campaigns?page=1\",\n                \"label\": \"1\",\n                \"page\": 1,\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"page\": null,\n                \"active\": false\n            }\n        ],\n        \"next_page_url\": null,\n        \"path\": \"http://172.20.10.4:8000/api/v1/sms-campaigns\",\n        \"per_page\": 10,\n        \"prev_page_url\": null,\n        \"to\": 3,\n        \"total\": 3\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "view campaign",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/sms-campaigns/cdf9beda-5ca7-4288-8d95-e7e42316b148/",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sms-campaigns",
+								"cdf9beda-5ca7-4288-8d95-e7e42316b148",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recipients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/sms-campaigns/cdf9beda-5ca7-4288-8d95-e7e42316b148/recipients",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sms-campaigns",
+								"cdf9beda-5ca7-4288-8d95-e7e42316b148",
+								"recipients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create sms campaign",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Campaign Name\",\r\n//   \"recipients\": [\r\n//     \"233241234567\",\r\n//     \"233501234567\"\r\n//   ],\r\n  \"group_ids\":[\r\n    \"245079\"\r\n  ],\r\n  \"sender_id\": \"SIRATEQ GH\",\r\n  \"message\": \"Hello, this is a test message\",  \r\n  \"scheduled_at\": \"2026-01-10 14:30:00\",\r\n  \"is_recurring\": true,\r\n  \"recurrence_frequency\": \"weekly\",\r\n  \"recurrence_interval\": 1,\r\n  \"recurrence_ends_at\": \"2026-02-28 23:59:59\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/sms-campaigns",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sms-campaigns"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "voice-campaigns",
+			"item": [
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/voice-campaigns",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"voice-campaigns"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SITE_URL}}/api/v1/sms-campaigns",
+									"host": [
+										"{{SITE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"sms-campaigns"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "172.20.10.4:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 Jan 2026 19:39:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"current_page\": 1,\n        \"data\": [\n            {\n                \"id\": 3,\n                \"user_id\": 3,\n                \"organization_id\": null,\n                \"uuid\": \"c6c2f78c-fd96-4c46-806b-f42db252d67d\",\n                \"name\": \"test\",\n                \"total_recipients\": 1,\n                \"messages_sent\": 0,\n                \"credits_used\": \"0.00\",\n                \"sender_id_id\": 1,\n                \"sender_id\": \"SIRATEQ GH\",\n                \"created_at\": \"2026-01-01T01:37:19.000000Z\",\n                \"updated_at\": \"2026-01-01T01:37:25.000000Z\",\n                \"deleted_at\": null,\n                \"scheduled_at\": null,\n                \"status\": \"failed\",\n                \"is_recurring\": 0,\n                \"recurrence_frequency\": \"daily\",\n                \"recurrence_interval\": 1,\n                \"recurrence_ends_at\": null,\n                \"provider_name\": null,\n                \"speed_per_sec\": null,\n                \"elapsed_seconds\": null,\n                \"elapsed_time\": null,\n                \"estimated_seconds_left\": null,\n                \"estimated_time_left\": null,\n                \"started_at\": null,\n                \"ended_at\": \"2026-01-01 01:37:25\"\n            },\n            {\n                \"id\": 2,\n                \"user_id\": 3,\n                \"organization_id\": null,\n                \"uuid\": \"8c70dca9-3219-4bf5-9ed9-d0a263ea7be6\",\n                \"name\": \"test\",\n                \"total_recipients\": 1,\n                \"messages_sent\": 0,\n                \"credits_used\": \"0.00\",\n                \"sender_id_id\": 1,\n                \"sender_id\": \"SIRATEQ GH\",\n                \"created_at\": \"2026-01-01T01:30:35.000000Z\",\n                \"updated_at\": \"2026-01-01T01:30:43.000000Z\",\n                \"deleted_at\": null,\n                \"scheduled_at\": null,\n                \"status\": \"failed\",\n                \"is_recurring\": 0,\n                \"recurrence_frequency\": \"daily\",\n                \"recurrence_interval\": 1,\n                \"recurrence_ends_at\": null,\n                \"provider_name\": null,\n                \"speed_per_sec\": null,\n                \"elapsed_seconds\": null,\n                \"elapsed_time\": null,\n                \"estimated_seconds_left\": null,\n                \"estimated_time_left\": null,\n                \"started_at\": null,\n                \"ended_at\": \"2026-01-01 01:30:43\"\n            },\n            {\n                \"id\": 1,\n                \"user_id\": 3,\n                \"organization_id\": null,\n                \"uuid\": \"cdf9beda-5ca7-4288-8d95-e7e42316b148\",\n                \"name\": \"tes\",\n                \"total_recipients\": 1,\n                \"messages_sent\": 0,\n                \"credits_used\": \"0.00\",\n                \"sender_id_id\": 1,\n                \"sender_id\": \"SIRATEQ GH\",\n                \"created_at\": \"2025-12-31T21:51:46.000000Z\",\n                \"updated_at\": \"2026-01-01T01:29:20.000000Z\",\n                \"deleted_at\": null,\n                \"scheduled_at\": null,\n                \"status\": \"pending\",\n                \"is_recurring\": 0,\n                \"recurrence_frequency\": \"daily\",\n                \"recurrence_interval\": 1,\n                \"recurrence_ends_at\": null,\n                \"provider_name\": null,\n                \"speed_per_sec\": null,\n                \"elapsed_seconds\": null,\n                \"elapsed_time\": null,\n                \"estimated_seconds_left\": null,\n                \"estimated_time_left\": null,\n                \"started_at\": \"2026-01-01 01:29:20\",\n                \"ended_at\": null\n            }\n        ],\n        \"first_page_url\": \"http://172.20.10.4:8000/api/v1/sms-campaigns?page=1\",\n        \"from\": 1,\n        \"last_page\": 1,\n        \"last_page_url\": \"http://172.20.10.4:8000/api/v1/sms-campaigns?page=1\",\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"page\": null,\n                \"active\": false\n            },\n            {\n                \"url\": \"http://172.20.10.4:8000/api/v1/sms-campaigns?page=1\",\n                \"label\": \"1\",\n                \"page\": 1,\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"page\": null,\n                \"active\": false\n            }\n        ],\n        \"next_page_url\": null,\n        \"path\": \"http://172.20.10.4:8000/api/v1/sms-campaigns\",\n        \"per_page\": 10,\n        \"prev_page_url\": null,\n        \"to\": 3,\n        \"total\": 3\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "view campaign",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/voice-campaigns/8b915918-14d6-4c2a-a2cf-f6c3d8dbd845",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"voice-campaigns",
+								"8b915918-14d6-4c2a-a2cf-f6c3d8dbd845"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recipients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/voice-campaigns/8b915918-14d6-4c2a-a2cf-f6c3d8dbd845/recipients",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"voice-campaigns",
+								"8b915918-14d6-4c2a-a2cf-f6c3d8dbd845",
+								"recipients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create sms campaign",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Campaign Name\",\r\n//   \"recipients\": [\r\n//     \"233241234567\",\r\n//     \"233501234567\"\r\n//   ],\r\n  \"group_ids\":[\r\n    \"245079\"\r\n  ],\r\n  \"sender_id\": \"SIRATEQ GH\",\r\n  \"message\": \"Hello, this is a test message\",  \r\n  \"scheduled_at\": \"2026-01-10 14:30:00\",\r\n  \"is_recurring\": true,\r\n  \"recurrence_frequency\": \"weekly\",\r\n  \"recurrence_interval\": 1,\r\n  \"recurrence_ends_at\": \"2026-02-28 23:59:59\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/sms-campaigns",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sms-campaigns"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "contact",
+			"item": [
+				{
+					"name": "all contacts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/contacts",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show contacts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/contacts/1",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"contacts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk assign to group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"contact_ids\":[\"1\"],\r\n    \"group_ids\":\r\n    [\"ee9fb0b4-83f0-4be5-a0be-1063e05ff0b8\",\"feab58b8-df74-435e-ae09-d7dde096ff0c\"]\r\n    }"
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/contacts/assign-group",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"contacts",
+								"assign-group"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create contact",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/contacts",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "groups",
+			"item": [
+				{
+					"name": "all groups",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/all-groups",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"all-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"description\" : \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/groups",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update group",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"description\" : \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/groups/66dbf9ca-112a-4c66-b5ad-0069f277c1b9",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								"66dbf9ca-112a-4c66-b5ad-0069f277c1b9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get group",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"description\" : \"test\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/groups/66dbf9ca-112a-4c66-b5ad-0069f277c1b9",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								"66dbf9ca-112a-4c66-b5ad-0069f277c1b9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete group",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"description\" : \"test\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/groups/66dbf9ca-112a-4c66-b5ad-0069f277c1b9",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								"66dbf9ca-112a-4c66-b5ad-0069f277c1b9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get groups",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/groups",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sender id",
+			"item": [
+				{
+					"name": "all sender ids",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/sender-ids",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sender-ids"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create sender id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sender_id\": \"test\",\r\n    \"purpose\" : \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/sender-ids",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sender-ids"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get sender id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"description\" : \"test\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/sender-ids/71267203-165e-48c9-a163-5aef1a2c6f01",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sender-ids",
+								"71267203-165e-48c9-a163-5aef1a2c6f01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete sender id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"description\" : \"test\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/groups/66dbf9ca-112a-4c66-b5ad-0069f277c1b9",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								"66dbf9ca-112a-4c66-b5ad-0069f277c1b9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all approved sender ids",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/all-sender-ids",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"all-sender-ids"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "message templates",
+			"item": [
+				{
+					"name": "all message templates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/message-templates",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"message-templates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create message template",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"content\" : \"test, [First Name]\",\r\n    \"type\": \"sms\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/message-templates",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"message-templates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update message-templates",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"content\" : \"test\",\r\n    \"type\": \"sms\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/message-templates/5ef2c8c8-e62d-4c43-9b59-09f2173da81a",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"message-templates",
+								"5ef2c8c8-e62d-4c43-9b59-09f2173da81a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get message template",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"description\" : \"test\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/message-templates/15c981c3-ae58-45b0-8958-39cfbcbe943e",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"message-templates",
+								"15c981c3-ae58-45b0-8958-39cfbcbe943e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete message templates",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"description\" : \"test\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/message-templates/15c981c3-ae58-45b0-8958-39cfbcbe943e",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"message-templates",
+								"15c981c3-ae58-45b0-8958-39cfbcbe943e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "wallet transaction",
+					"item": [
+						{
+							"name": "get transactions",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"test\",\r\n    \"content\" : \"test, [First Name]\",\r\n    \"type\": \"sms\"\r\n}"
+								},
+								"url": {
+									"raw": "{{SITE_URL}}/api/v1/user/transactions",
+									"host": [
+										"{{SITE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"transactions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show transactions",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"test\",\r\n    \"content\" : \"test, [First Name]\",\r\n    \"type\": \"sms\"\r\n}"
+								},
+								"url": {
+									"raw": "{{SITE_URL}}/api/v1/user/transactions/63a13fba-84a4-4fe1-becc-9a305925cf2b",
+									"host": [
+										"{{SITE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"transactions",
+										"63a13fba-84a4-4fe1-becc-9a305925cf2b"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "bundle history",
+					"item": [
+						{
+							"name": "get bundle-history",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"test\",\r\n    \"content\" : \"test, [First Name]\",\r\n    \"type\": \"sms\"\r\n}"
+								},
+								"url": {
+									"raw": "{{SITE_URL}}/api/v1/user/bundle-history",
+									"host": [
+										"{{SITE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"bundle-history"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show bundle history",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"test\",\r\n    \"content\" : \"test, [First Name]\",\r\n    \"type\": \"sms\"\r\n}"
+								},
+								"url": {
+									"raw": "{{SITE_URL}}/api/v1/user/bundle-history/1",
+									"host": [
+										"{{SITE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"bundle-history",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "user balance",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"content\" : \"test, [First Name]\",\r\n    \"type\": \"sms\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/user/balance",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"balance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get deductions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"content\" : \"test, [First Name]\",\r\n    \"type\": \"sms\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/user/deductions",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"deductions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"current_password\": \"password\",\r\n    \"password\": \"password\",\r\n    \"password_confirmation\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/user/change-password",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get app-lock",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"content\" : \"test, [First Name]\",\r\n    \"type\": \"sms\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/user/app-lock",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"app-lock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update app-lock",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"content\" : \"test, [First Name]\",\r\n    \"type\": \"sms\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/user/app-lock",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"app-lock"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payments",
+			"item": [
+				{
+					"name": "verify paystack",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"content\" : \"test, [First Name]\",\r\n    \"type\": \"sms\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/payments/paystack/verify/TXN_1767234120056_zetjslzfe",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"payments",
+								"paystack",
+								"verify",
+								"TXN_1767234120056_zetjslzfe"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "api keys",
+			"item": [
+				{
+					"name": "all api keys",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/api-keys",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"api-keys"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generate new api key",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/api-keys",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"api-keys"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete api key",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/api-keys/4b6406ff-e2e4-4343-8879-44374e8552fe",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"api-keys",
+								"4b6406ff-e2e4-4343-8879-44374e8552fe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/api-keys/30eba0ec-a4cf-485b-9f6b-e8eb308162c1/change-status",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"api-keys",
+								"30eba0ec-a4cf-485b-9f6b-e8eb308162c1",
+								"change-status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get key",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SITE_URL}}/api/v1/api-keys/f2ed33fd-e4fe-435e-8536-f5f98a155c37",
+							"host": [
+								"{{SITE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"api-keys",
+								"f2ed33fd-e4fe-435e-8536-f5f98a155c37"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Folder",
+			"item": []
+		},
+		{
+			"name": "dashboard-stats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SITE_URL}}/api/v1/dashboard-stats",
+					"host": [
+						"{{SITE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"dashboard-stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "packages",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"test\",\r\n    \"content\" : \"test, [First Name]\",\r\n    \"type\": \"sms\"\r\n}"
+				},
+				"url": {
+					"raw": "{{SITE_URL}}/api/v1/packages",
+					"host": [
+						"{{SITE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"packages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "13|XkPRfMswxofxfigq1lutbnY4VbicZseGEhyrAPyc826cf5cd",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SITE_URL",
+			"value": "http://172.20.10.4:8000"
+		}
+	]
+}

@@ -1,0 +1,33 @@
+---
+title: "List Wallet Transactions"
+api: "GET /user/transactions"
+description: "Retrieve all wallet transactions"
+---
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "uuid": "63a13fba-84a4-4fe1-becc-9a305925cf2b",
+      "type": "credit",
+      "amount": 500.00,
+      "status": "completed",
+      "description": "Credit purchase - Premium Bundle",
+      "created_at": "2026-01-05T00:00:00.000000Z"
+    },
+    {
+      "id": 2,
+      "uuid": "74b24gcb-95b5-5gf2-cfdd-0b416036dg3c",
+      "type": "debit",
+      "amount": 50.00,
+      "status": "completed",
+      "description": "SMS Campaign - Welcome Campaign",
+      "created_at": "2026-01-10T00:00:00.000000Z"
+    }
+  ]
+}
+```
+</ResponseExample>

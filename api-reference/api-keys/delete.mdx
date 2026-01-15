@@ -1,0 +1,29 @@
+---
+title: "Delete API Key"
+api: "DELETE /api-keys/{uuid}"
+description: "Delete an API key"
+---
+
+<ParamField path="uuid" type="string" required>
+  The unique identifier (UUID) of the API key
+</ParamField>
+
+<Warning>
+  Deleted API keys cannot be recovered. Any applications using this key will immediately lose access.
+</Warning>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "message": "API key deleted successfully."
+}
+```
+
+```json 404 - Not Found
+{
+  "success": false,
+  "message": "API key not found."
+}
+```
+</ResponseExample>

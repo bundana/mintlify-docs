@@ -1,0 +1,33 @@
+---
+title: "List All Groups"
+api: "GET /all-groups"
+description: "Returns all contact groups without pagination"
+---
+
+<Note>
+  Use this endpoint when you need all groups at once, such as populating a dropdown. For large datasets, prefer the paginated `/groups` endpoint.
+</Note>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "uuid": "ee9fb0b4-83f0-4be5-a0be-1063e05ff0b8",
+      "name": "VIP Customers",
+      "description": "High-value customers",
+      "contacts_count": 150
+    },
+    {
+      "id": 2,
+      "uuid": "feab58b8-df74-435e-ae09-d7dde096ff0c",
+      "name": "Newsletter Subscribers",
+      "description": "Users subscribed to our newsletter",
+      "contacts_count": 500
+    }
+  ]
+}
+```
+</ResponseExample>

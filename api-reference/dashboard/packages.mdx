@@ -1,0 +1,47 @@
+---
+title: "List Packages"
+api: "GET /packages"
+description: "Retrieve available credit packages for purchase"
+---
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "name": "Starter Bundle",
+      "credits": 1000,
+      "price": 100.00,
+      "currency": "GHS",
+      "popular": false
+    },
+    {
+      "id": 2,
+      "name": "Growth Bundle",
+      "credits": 5000,
+      "price": 450.00,
+      "currency": "GHS",
+      "popular": true
+    },
+    {
+      "id": 3,
+      "name": "Premium Bundle",
+      "credits": 10000,
+      "price": 800.00,
+      "currency": "GHS",
+      "popular": false
+    },
+    {
+      "id": 4,
+      "name": "Enterprise Bundle",
+      "credits": 50000,
+      "price": 3500.00,
+      "currency": "GHS",
+      "popular": false
+    }
+  ]
+}
+```
+</ResponseExample>

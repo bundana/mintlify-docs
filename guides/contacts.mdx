@@ -1,0 +1,106 @@
+---
+title: "Contacts & Groups"
+description: "Manage your contacts and organize them into groups"
+---
+
+## Overview
+
+Contacts are the people you send messages to. Groups help you organize contacts for targeted campaigns.
+
+## Managing Contacts
+
+### Creating Contacts
+
+Add contacts individually via the API:
+
+```json
+{
+  "phone_number": "233241234567",
+  "first_name": "John",
+  "last_name": "Doe",
+  "email": "john@example.com"
+}
+```
+
+### Contact Fields
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `phone_number` | Yes | International, local, or with + prefix |
+| `first_name` | No | Used for personalization |
+| `last_name` | No | Used for personalization |
+| `email` | No | Contact's email address |
+
+## Working with Groups
+
+Groups allow you to organize contacts for targeted messaging.
+
+### Creating a Group
+
+```json
+{
+  "name": "VIP Customers",
+  "description": "High-value customers for premium campaigns"
+}
+```
+
+### Assigning Contacts to Groups
+
+You can assign multiple contacts to multiple groups in one request:
+
+```json
+{
+  "contact_ids": ["1", "2", "3"],
+  "group_ids": [
+    "ee9fb0b4-83f0-4be5-a0be-1063e05ff0b8",
+    "feab58b8-df74-435e-ae09-d7dde096ff0c"
+  ]
+}
+```
+
+## Use Cases
+
+<AccordionGroup>
+  <Accordion title="Customer Segmentation">
+    Create groups for different customer segments:
+    - New customers
+    - VIP customers
+    - Inactive customers
+    - Newsletter subscribers
+  </Accordion>
+  
+  <Accordion title="Geographic Targeting">
+    Organize contacts by location:
+    - Accra customers
+    - Tamale customers
+    - Regional offices
+  </Accordion>
+  
+  <Accordion title="Product-Based Groups">
+    Group customers by product interest:
+    - Product A users
+    - Product B users
+    - Beta testers
+  </Accordion>
+</AccordionGroup>
+
+## Best Practices
+
+<Tip>
+  **Keep groups updated**: Regularly review and update your groups to ensure accurate targeting.
+</Tip>
+
+<Warning>
+  **Respect privacy**: Only add contacts who have consented to receive messages from you.
+</Warning>
+
+## API Reference
+
+<CardGroup cols={2}>
+  <Card title="Contacts API" icon="users" href="/api-reference/contacts/list">
+    Manage contacts programmatically
+  </Card>
+  <Card title="Groups API" icon="layer-group" href="/api-reference/groups/list">
+    Create and manage contact groups
+  </Card>
+</CardGroup>

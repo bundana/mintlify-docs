@@ -1,0 +1,40 @@
+---
+title: "Get Campaign Recipients"
+api: "GET /sms-campaigns/{uuid}/recipients"
+description: "Retrieve the list of recipients for a specific SMS campaign"
+---
+
+<ParamField path="uuid" type="string" required>
+  The unique identifier (UUID) of the campaign
+</ParamField>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "phone_number": "233241234567",
+      "status": "delivered",
+      "sent_at": "2026-01-01T01:37:25.000000Z",
+      "delivered_at": "2026-01-01T01:37:30.000000Z"
+    },
+    {
+      "id": 2,
+      "phone_number": "233501234567",
+      "status": "pending",
+      "sent_at": null,
+      "delivered_at": null
+    }
+  ]
+}
+```
+
+```json 404 - Not Found
+{
+  "success": false,
+  "message": "Campaign not found."
+}
+```
+</ResponseExample>

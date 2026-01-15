@@ -1,0 +1,45 @@
+---
+title: "Bulk Assign to Groups"
+api: "POST /contacts/assign-group"
+description: "Assign multiple contacts to multiple groups at once"
+---
+
+<ParamField body="contact_ids" type="array" required>
+  Array of contact IDs to assign
+</ParamField>
+
+<ParamField body="group_ids" type="array" required>
+  Array of group UUIDs to assign contacts to
+</ParamField>
+
+<RequestExample>
+```json Bulk Assign
+{
+  "contact_ids": ["1", "2", "3"],
+  "group_ids": [
+    "ee9fb0b4-83f0-4be5-a0be-1063e05ff0b8",
+    "feab58b8-df74-435e-ae09-d7dde096ff0c"
+  ]
+}
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "message": "Contacts assigned to groups successfully."
+}
+```
+
+```json 422 - Validation Error
+{
+  "success": false,
+  "message": "The given data was invalid.",
+  "errors": {
+    "contact_ids": ["The contact_ids field is required."],
+    "group_ids": ["The group_ids field is required."]
+  }
+}
+```
+</ResponseExample>

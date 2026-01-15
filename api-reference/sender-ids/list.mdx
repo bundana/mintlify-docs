@@ -1,0 +1,33 @@
+---
+title: "List Sender IDs"
+api: "GET /sender-ids"
+description: "Returns all sender IDs for the authenticated user"
+---
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "uuid": "71267203-165e-48c9-a163-5aef1a2c6f01",
+      "sender_id": "MYCOMPANY",
+      "purpose": "Marketing campaigns",
+      "status": "approved",
+      "created_at": "2026-01-01T00:00:00.000000Z",
+      "updated_at": "2026-01-02T00:00:00.000000Z"
+    },
+    {
+      "id": 2,
+      "uuid": "82378314-276f-59da-b274-6bfg2b3d7g12",
+      "sender_id": "ALERTS",
+      "purpose": "Transactional alerts",
+      "status": "pending",
+      "created_at": "2026-01-10T00:00:00.000000Z",
+      "updated_at": "2026-01-10T00:00:00.000000Z"
+    }
+  ]
+}
+```
+</ResponseExample>

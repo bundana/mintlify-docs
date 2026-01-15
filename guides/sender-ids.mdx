@@ -1,0 +1,81 @@
+---
+title: "Sender IDs"
+description: "Set up and manage your sender IDs for professional messaging"
+---
+
+## What is a Sender ID?
+
+A Sender ID is the name or number that appears as the sender when recipients receive your SMS or voice messages. Using a branded Sender ID helps recipients identify your business.
+
+<Note>
+  Sender IDs must be approved before they can be used. The approval process typically takes an hour or 24-48 hours.
+</Note>
+
+## Sender ID Requirements
+
+| Requirement | Description |
+|-------------|-------------|
+| **Length** | Maximum 11 characters |
+| **Format** | Alphanumeric (letters and numbers) |
+| **Content** | Must represent your business or brand |
+
+### Examples of Valid Sender IDs
+
+- ✅ `MYCOMPANY`
+- ✅ `Pollvite`
+- ✅ `ALERT123`
+- ✅ `BANKGH`
+- ✅ `Hon Abdul`
+
+
+### Examples of Invalid Sender IDs
+
+- ❌ `VERYLONGCOMPANYNAME` (exceeds 11 characters)
+- ❌ `!@#$%` (special characters not allowed)
+
+## Creating a Sender ID
+
+Request a new Sender ID via the API:
+
+```json
+{
+  "sender_id": "MYCOMPANY",
+  "purpose": "Marketing and transactional messages for our e-commerce platform"
+}
+```
+
+## Sender ID Status
+
+| Status | Description |
+|--------|-------------|
+| `pending` | Awaiting approval from the network |
+| `approved` | Ready to use in campaigns |
+| `rejected` | Rejected - contact support for details |
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Use Your Brand Name">
+    Choose a Sender ID that clearly identifies your business. This builds trust with recipients.
+  </Accordion>
+  
+  <Accordion title="Keep It Short">
+    Shorter Sender IDs are easier to read and remember. Aim for 6-8 characters.
+  </Accordion>
+  
+  <Accordion title="Be Consistent">
+    Use the same Sender ID across all your campaigns for brand consistency.
+  </Accordion>
+  
+  <Accordion title="Separate by Purpose">
+    Consider having different Sender IDs for different purposes:
+    - `MYCOMPANY` for marketing
+    - `ALERTS` for transactional messages
+  </Accordion>
+</AccordionGroup>
+
+## API Reference
+
+<Card title="Sender IDs API" icon="id-card" href="/api-reference/sender-ids/list">
+  Manage sender IDs programmatically
+</Card>

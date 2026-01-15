@@ -1,0 +1,25 @@
+---
+title: "Delete Message Template"
+api: "DELETE /message-templates/{uuid}"
+description: "Delete a message template"
+---
+
+<ParamField path="uuid" type="string" required>
+  The unique identifier (UUID) of the template
+</ParamField>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "message": "Template deleted successfully."
+}
+```
+
+```json 404 - Not Found
+{
+  "success": false,
+  "message": "Template not found."
+}
+```
+</ResponseExample>

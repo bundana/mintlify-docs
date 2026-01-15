@@ -1,43 +1,82 @@
-# Mintlify Starter Kit
+# Sendazi API Documentation
 
-Use the starter kit to get your docs deployed and ready to customize.
+Official API documentation for Sendazi - a powerful SMS and Voice campaign management platform.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Features
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+- 📱 **SMS Campaigns** - Send bulk SMS messages with scheduling and recurring options
+- 📞 **Voice Campaigns** - Automated voice broadcasts with text-to-speech
+- 👥 **Contact Management** - Organize contacts into groups for targeted messaging
+- 🏷️ **Sender IDs** - Custom sender IDs for professional branding
+- 📝 **Message Templates** - Reusable templates with dynamic placeholders
+- 🔑 **API Access** - Full programmatic access via REST API
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+## Documentation Structure
+
+```
+├── index.mdx                      # Homepage
+├── quickstart.mdx                 # Getting started guide
+├── guides/                        # Conceptual guides
+│   ├── campaigns.mdx
+│   ├── contacts.mdx
+│   ├── sender-ids.mdx
+│   └── templates.mdx
+├── api-reference/                 # API documentation
+│   ├── introduction.mdx
+│   ├── openapi.json              # OpenAPI specification
+│   ├── sms-campaigns/            # SMS campaign endpoints
+│   ├── voice-campaigns/          # Voice campaign endpoints
+│   ├── contacts/                 # Contact endpoints
+│   ├── groups/                   # Group endpoints
+│   ├── sender-ids/               # Sender ID endpoints
+│   ├── message-templates/        # Template endpoints
+│   ├── user/                     # Account endpoints
+│   ├── api-keys/                 # API key management
+│   ├── payments/                 # Payment verification
+│   └── dashboard/                # Dashboard & packages
+└── docs.json                      # Mintlify configuration
+```
 
 ## Development
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
+Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview documentation locally:
 
-```
+```bash
 npm i -g mint
 ```
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
+Run the development server:
 
-```
+```bash
 mint dev
 ```
 
 View your local preview at `http://localhost:3000`.
 
-## Publishing changes
+## Deployment
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+Changes pushed to the main branch are automatically deployed via the Mintlify GitHub app.
 
-## Need help?
+## API Base URL
 
-### Troubleshooting
+```
+https://sendazi.com/api/v1
+```
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
+## Authentication
 
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+All API endpoints require Bearer token authentication:
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Support
+
+- 📧 Email: support@sendazi.com
+- 📖 Docs: https://docs.sendazi.com
+- 🌐 Dashboard: https://sendazi.com
+
+## License
+
+MIT

@@ -1,0 +1,29 @@
+---
+title: "Delete Sender ID"
+api: "DELETE /sender-ids/{uuid}"
+description: "Delete a sender ID"
+---
+
+<ParamField path="uuid" type="string" required>
+  The unique identifier (UUID) of the sender ID
+</ParamField>
+
+<Warning>
+  Deleting a sender ID will prevent it from being used in future campaigns. Existing campaigns using this sender ID will not be affected.
+</Warning>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "message": "Sender ID deleted successfully."
+}
+```
+
+```json 404 - Not Found
+{
+  "success": false,
+  "message": "Sender ID not found."
+}
+```
+</ResponseExample>

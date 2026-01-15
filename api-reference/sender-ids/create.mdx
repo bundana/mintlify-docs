@@ -1,0 +1,53 @@
+---
+title: "Create Sender ID"
+api: "POST /sender-ids"
+description: "Request a new sender ID for approval"
+---
+
+<ParamField body="sender_id" type="string" required>
+  The sender ID name (alphanumeric, max 11 characters)
+</ParamField>
+
+<ParamField body="purpose" type="string" required>
+  Description of how the sender ID will be used
+</ParamField>
+
+<Note>
+  Sender IDs require approval before they can be used. The approval process typically takes an hour or 24-48 hours.
+</Note>
+
+<RequestExample>
+```json Create Sender ID
+{
+  "sender_id": "MYCOMPANY",
+  "purpose": "Marketing and promotional campaigns"
+}
+```
+</RequestExample>
+
+<ResponseExample>
+```json 201 - Created
+{
+  "success": true,
+  "data": {
+    "id": 3,
+    "uuid": "93489425-387g-6aeb-c385-7cgh3c4e8h23",
+    "sender_id": "MYCOMPANY",
+    "purpose": "Marketing and promotional campaigns",
+    "status": "pending",
+    "created_at": "2026-01-15T13:00:00.000000Z",
+    "updated_at": "2026-01-15T13:00:00.000000Z"
+  }
+}
+```
+
+```json 422 - Validation Error
+{
+  "success": false,
+  "message": "The given data was invalid.",
+  "errors": {
+    "sender_id": ["The sender id must not exceed 11 characters."]
+  }
+}
+```
+</ResponseExample>

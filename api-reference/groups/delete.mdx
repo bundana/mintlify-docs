@@ -1,0 +1,29 @@
+---
+title: "Delete Group"
+api: "DELETE /groups/{uuid}"
+description: "Delete a contact group"
+---
+
+<ParamField path="uuid" type="string" required>
+  The unique identifier (UUID) of the group
+</ParamField>
+
+<Warning>
+  Deleting a group does not delete the contacts within it. Contacts will remain in your database.
+</Warning>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "message": "Group deleted successfully."
+}
+```
+
+```json 404 - Not Found
+{
+  "success": false,
+  "message": "Group not found."
+}
+```
+</ResponseExample>

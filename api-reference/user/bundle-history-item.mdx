@@ -1,0 +1,33 @@
+---
+title: "Get Bundle History Item"
+api: "GET /user/bundle-history/{id}"
+description: "Retrieve a specific bundle purchase by ID"
+---
+
+<ParamField path="id" type="integer" required>
+  The ID of the bundle purchase
+</ParamField>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "package_name": "Premium Bundle",
+    "credits": 5000,
+    "amount": 400.00,
+    "payment_method": "paystack",
+    "transaction_reference": "TXN_1767234120056_zetjslzfe",
+    "created_at": "2026-01-05T00:00:00.000000Z"
+  }
+}
+```
+
+```json 404 - Not Found
+{
+  "success": false,
+  "message": "Bundle history not found."
+}
+```
+</ResponseExample>

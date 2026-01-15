@@ -1,0 +1,33 @@
+---
+title: "Get Sender ID"
+api: "GET /sender-ids/{uuid}"
+description: "Retrieve a specific sender ID by UUID"
+---
+
+<ParamField path="uuid" type="string" required>
+  The unique identifier (UUID) of the sender ID
+</ParamField>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "uuid": "71267203-165e-48c9-a163-5aef1a2c6f01",
+    "sender_id": "MYCOMPANY",
+    "purpose": "Marketing campaigns",
+    "status": "approved",
+    "created_at": "2026-01-01T00:00:00.000000Z",
+    "updated_at": "2026-01-02T00:00:00.000000Z"
+  }
+}
+```
+
+```json 404 - Not Found
+{
+  "success": false,
+  "message": "Sender ID not found."
+}
+```
+</ResponseExample>

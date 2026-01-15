@@ -1,152 +1,1115 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
-    "version": "1.0.0"
+    "title": "Sendazi API",
+    "description": "Sendazi is a powerful SMS and Voice campaign management platform. This API allows you to manage campaigns, contacts, groups, sender IDs, message templates, and more.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Sendazi Support",
+      "email": "support@sendazi.com"
+    }
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
-    }
+      "url": "https://sendazi.com/api/v1",
+      "description": "Production server"
+    } 
   ],
   "security": [
     {
       "bearerAuth": []
     }
   ],
+  "tags": [
+    { "name": "SMS Campaigns", "description": "Manage SMS campaigns" },
+    { "name": "Voice Campaigns", "description": "Manage voice campaigns" },
+    { "name": "Contacts", "description": "Manage contacts" },
+    { "name": "Groups", "description": "Manage contact groups" },
+    { "name": "Sender IDs", "description": "Manage sender IDs" },
+    { "name": "Message Templates", "description": "Manage message templates" },
+    { "name": "User", "description": "User account management" },
+    { "name": "API Keys", "description": "Manage API keys" },
+    { "name": "Payments", "description": "Payment verification" },
+    { "name": "Dashboard", "description": "Dashboard statistics" }
+  ],
   "paths": {
-    "/plants": {
+    "/sms-campaigns/quick": {
       "get": {
-        "description": "Returns all plants from the system that the user has access to",
+        "tags": ["SMS Campaigns"],
+        "summary": "Quick Send SMS",
+        "description": "Send a single SMS instantly using a simple GET request. Perfect for transactional messages and quick integrations.",
+        "operationId": "quickSendSms",
+        "security": [],
         "parameters": [
           {
-            "name": "limit",
+            "name": "to",
             "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
+            "required": true,
+            "description": "Recipient phone number (international, local, or with + prefix)",
+            "schema": { "type": "string" },
+            "example": "233241234567"
+          },
+          {
+            "name": "message",
+            "in": "query",
+            "required": true,
+            "description": "Message content (URL encoded)",
+            "schema": { "type": "string" },
+            "example": "Hello from Sendazi!"
+          },
+          {
+            "name": "sender_id",
+            "in": "query",
+            "required": true,
+            "description": "Your approved sender ID",
+            "schema": { "type": "string" },
+            "example": "MYCOMPANY"
+          },
+          {
+            "name": "api_key",
+            "in": "query",
+            "required": true,
+            "description": "Your API key",
+            "schema": { "type": "string" },
+            "example": "pk_your_api_key_here"
           }
         ],
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "SMS sent successfully",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
-                }
+                "schema": { "$ref": "#/components/schemas/QuickSendResponse" }
               }
             }
           },
-          "400": {
-            "description": "Unexpected error",
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      }
+    },
+    "/sms-campaigns": {
+      "get": {
+        "tags": ["SMS Campaigns"],
+        "summary": "List SMS Campaigns",
+        "description": "Returns a paginated list of all SMS campaigns for the authenticated user.",
+        "operationId": "listSmsCampaigns",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "schema": { "type": "integer", "default": 1 }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": { "type": "integer", "default": 10 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
+                "schema": { "$ref": "#/components/schemas/SmsCampaignListResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
+        }
+      },
+      "post": {
+        "tags": ["SMS Campaigns"],
+        "summary": "Create SMS Campaign",
+        "description": "Create a new SMS campaign. You can specify recipients directly or use group IDs to target contact groups.",
+        "operationId": "createSmsCampaign",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateSmsCampaignRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Campaign created successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SmsCampaignResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      }
+    },
+    "/sms-campaigns/{uuid}": {
+      "get": {
+        "tags": ["SMS Campaigns"],
+        "summary": "Get SMS Campaign",
+        "description": "Retrieve details of a specific SMS campaign by its UUID.",
+        "operationId": "getSmsCampaign",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "Campaign UUID",
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SmsCampaignResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/sms-campaigns/{uuid}/recipients": {
+      "get": {
+        "tags": ["SMS Campaigns"],
+        "summary": "Get Campaign Recipients",
+        "description": "Retrieve the list of recipients for a specific SMS campaign.",
+        "operationId": "getSmsCampaignRecipients",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "Campaign UUID",
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CampaignRecipientsResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/voice-campaigns": {
+      "get": {
+        "tags": ["Voice Campaigns"],
+        "summary": "List Voice Campaigns",
+        "description": "Returns a paginated list of all voice campaigns for the authenticated user.",
+        "operationId": "listVoiceCampaigns",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "schema": { "type": "integer", "default": 1 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/VoiceCampaignListResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
+        }
+      },
+      "post": {
+        "tags": ["Voice Campaigns"],
+        "summary": "Create Voice Campaign",
+        "description": "Create a new voice campaign.",
+        "operationId": "createVoiceCampaign",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateVoiceCampaignRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Campaign created successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/VoiceCampaignResponse" }
+              }
+            }
+          },
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      }
+    },
+    "/voice-campaigns/{uuid}": {
+      "get": {
+        "tags": ["Voice Campaigns"],
+        "summary": "Get Voice Campaign",
+        "description": "Retrieve details of a specific voice campaign by its UUID.",
+        "operationId": "getVoiceCampaign",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "Campaign UUID",
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/VoiceCampaignResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/voice-campaigns/{uuid}/recipients": {
+      "get": {
+        "tags": ["Voice Campaigns"],
+        "summary": "Get Voice Campaign Recipients",
+        "description": "Retrieve the list of recipients for a specific voice campaign.",
+        "operationId": "getVoiceCampaignRecipients",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "Campaign UUID",
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CampaignRecipientsResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/contacts": {
+      "get": {
+        "tags": ["Contacts"],
+        "summary": "List Contacts",
+        "description": "Returns a paginated list of all contacts.",
+        "operationId": "listContacts",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "schema": { "type": "integer", "default": 1 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ContactListResponse" }
               }
             }
           }
         }
       },
       "post": {
-        "description": "Creates a new plant in the store",
+        "tags": ["Contacts"],
+        "summary": "Create Contact",
+        "description": "Create a new contact.",
+        "operationId": "createContact",
         "requestBody": {
-          "description": "Plant to add to the store",
+          "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+              "schema": { "$ref": "#/components/schemas/CreateContactRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Contact created successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ContactResponse" }
               }
             }
           },
-          "required": true
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      }
+    },
+    "/contacts/{id}": {
+      "get": {
+        "tags": ["Contacts"],
+        "summary": "Get Contact",
+        "description": "Retrieve a specific contact by ID.",
+        "operationId": "getContact",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Contact ID",
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ContactResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/contacts/assign-group": {
+      "post": {
+        "tags": ["Contacts"],
+        "summary": "Bulk Assign Contacts to Groups",
+        "description": "Assign multiple contacts to multiple groups at once.",
+        "operationId": "bulkAssignContactsToGroups",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/BulkAssignGroupRequest" }
+            }
+          }
         },
         "responses": {
           "200": {
-            "description": "plant response",
+            "description": "Contacts assigned successfully",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
+                "schema": { "$ref": "#/components/schemas/SuccessResponse" }
               }
             }
           },
-          "400": {
-            "description": "unexpected error",
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      }
+    },
+    "/groups": {
+      "get": {
+        "tags": ["Groups"],
+        "summary": "List Groups (Paginated)",
+        "description": "Returns a paginated list of contact groups.",
+        "operationId": "listGroups",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "schema": { "type": "integer", "default": 1 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
+                "schema": { "$ref": "#/components/schemas/GroupListResponse" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Groups"],
+        "summary": "Create Group",
+        "description": "Create a new contact group.",
+        "operationId": "createGroup",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateGroupRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Group created successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/GroupResponse" }
+              }
+            }
+          },
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      }
+    },
+    "/all-groups": {
+      "get": {
+        "tags": ["Groups"],
+        "summary": "List All Groups",
+        "description": "Returns all contact groups without pagination.",
+        "operationId": "listAllGroups",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AllGroupsResponse" }
               }
             }
           }
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
+    "/groups/{uuid}": {
+      "get": {
+        "tags": ["Groups"],
+        "summary": "Get Group",
+        "description": "Retrieve a specific group by UUID.",
+        "operationId": "getGroup",
         "parameters": [
           {
-            "name": "id",
+            "name": "uuid",
             "in": "path",
-            "description": "ID of plant to delete",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "description": "Group UUID",
+            "schema": { "type": "string", "format": "uuid" }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
+          "200": {
+            "description": "Successful response",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
+                "schema": { "$ref": "#/components/schemas/GroupResponse" }
               }
             }
-          }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
         }
-      }
-    }
-  },
-  "webhooks": {
-    "/plant/webhook": {
-      "post": {
-        "description": "Information about a new plant added to the store",
+      },
+      "put": {
+        "tags": ["Groups"],
+        "summary": "Update Group",
+        "description": "Update an existing contact group.",
+        "operationId": "updateGroup",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "Group UUID",
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
         "requestBody": {
-          "description": "Plant added to the store",
+          "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
+              "schema": { "$ref": "#/components/schemas/UpdateGroupRequest" }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Return a 200 status to indicate that the data was received successfully"
+            "description": "Group updated successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/GroupResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      },
+      "delete": {
+        "tags": ["Groups"],
+        "summary": "Delete Group",
+        "description": "Delete a contact group.",
+        "operationId": "deleteGroup",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "Group UUID",
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Group deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/sender-ids": {
+      "get": {
+        "tags": ["Sender IDs"],
+        "summary": "List Sender IDs",
+        "description": "Returns all sender IDs for the authenticated user.",
+        "operationId": "listSenderIds",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SenderIdListResponse" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Sender IDs"],
+        "summary": "Create Sender ID",
+        "description": "Request a new sender ID. The sender ID will need to be approved before it can be used.",
+        "operationId": "createSenderId",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateSenderIdRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Sender ID created successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SenderIdResponse" }
+              }
+            }
+          },
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      }
+    },
+    "/all-sender-ids": {
+      "get": {
+        "tags": ["Sender IDs"],
+        "summary": "List Approved Sender IDs",
+        "description": "Returns all approved sender IDs that can be used for campaigns.",
+        "operationId": "listApprovedSenderIds",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ApprovedSenderIdListResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sender-ids/{uuid}": {
+      "get": {
+        "tags": ["Sender IDs"],
+        "summary": "Get Sender ID",
+        "description": "Retrieve a specific sender ID by UUID.",
+        "operationId": "getSenderId",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "Sender ID UUID",
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SenderIdResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      },
+      "delete": {
+        "tags": ["Sender IDs"],
+        "summary": "Delete Sender ID",
+        "description": "Delete a sender ID.",
+        "operationId": "deleteSenderId",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "Sender ID UUID",
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sender ID deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/message-templates": {
+      "get": {
+        "tags": ["Message Templates"],
+        "summary": "List Message Templates",
+        "description": "Returns all message templates.",
+        "operationId": "listMessageTemplates",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MessageTemplateListResponse" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Message Templates"],
+        "summary": "Create Message Template",
+        "description": "Create a new message template. Templates support placeholders like [First Name] for personalization.",
+        "operationId": "createMessageTemplate",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateMessageTemplateRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Template created successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MessageTemplateResponse" }
+              }
+            }
+          },
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      }
+    },
+    "/message-templates/{uuid}": {
+      "get": {
+        "tags": ["Message Templates"],
+        "summary": "Get Message Template",
+        "description": "Retrieve a specific message template by UUID.",
+        "operationId": "getMessageTemplate",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "Template UUID",
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MessageTemplateResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      },
+      "put": {
+        "tags": ["Message Templates"],
+        "summary": "Update Message Template",
+        "description": "Update an existing message template.",
+        "operationId": "updateMessageTemplate",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "Template UUID",
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateMessageTemplateRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Template updated successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MessageTemplateResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      },
+      "delete": {
+        "tags": ["Message Templates"],
+        "summary": "Delete Message Template",
+        "description": "Delete a message template.",
+        "operationId": "deleteMessageTemplate",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "Template UUID",
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Template deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/user/balance": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get Account Balance",
+        "description": "Retrieve the current account balance and credit information.",
+        "operationId": "getUserBalance",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BalanceResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/deductions": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get Deductions",
+        "description": "Retrieve the list of credit deductions.",
+        "operationId": "getUserDeductions",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DeductionsResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/transactions": {
+      "get": {
+        "tags": ["User"],
+        "summary": "List Wallet Transactions",
+        "description": "Retrieve all wallet transactions.",
+        "operationId": "listTransactions",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TransactionListResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/transactions/{uuid}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get Transaction",
+        "description": "Retrieve a specific transaction by UUID.",
+        "operationId": "getTransaction",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "Transaction UUID",
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TransactionResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/user/bundle-history": {
+      "get": {
+        "tags": ["User"],
+        "summary": "List Bundle History",
+        "description": "Retrieve the history of purchased bundles.",
+        "operationId": "listBundleHistory",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BundleHistoryListResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/bundle-history/{id}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get Bundle History Item",
+        "description": "Retrieve a specific bundle history item by ID.",
+        "operationId": "getBundleHistoryItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Bundle history ID",
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BundleHistoryResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/api-keys": {
+      "get": {
+        "tags": ["API Keys"],
+        "summary": "List API Keys",
+        "description": "Returns all API keys for the authenticated user.",
+        "operationId": "listApiKeys",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ApiKeyListResponse" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["API Keys"],
+        "summary": "Generate API Key",
+        "description": "Generate a new API key.",
+        "operationId": "generateApiKey",
+        "responses": {
+          "201": {
+            "description": "API key created successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ApiKeyResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api-keys/{uuid}": {
+      "get": {
+        "tags": ["API Keys"],
+        "summary": "Get API Key",
+        "description": "Retrieve a specific API key by UUID.",
+        "operationId": "getApiKey",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "API Key UUID",
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ApiKeyResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      },
+      "delete": {
+        "tags": ["API Keys"],
+        "summary": "Delete API Key",
+        "description": "Delete an API key.",
+        "operationId": "deleteApiKey",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "API Key UUID",
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "API key deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/api-keys/{uuid}/change-status": {
+      "post": {
+        "tags": ["API Keys"],
+        "summary": "Toggle API Key Status",
+        "description": "Enable or disable an API key.",
+        "operationId": "changeApiKeyStatus",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "API Key UUID",
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status changed successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ApiKeyResponse" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/payments/verify/{reference}": {
+      "post": {
+        "tags": ["Payments"],
+        "summary": "Verify Payment",
+        "description": "Verify a payment transaction.",
+        "operationId": "verifyPayment",
+        "parameters": [
+          {
+            "name": "reference",
+            "in": "path",
+            "required": true,
+            "description": "Payment transaction reference",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment verified successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PaymentVerificationResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      }
+    },
+    "/packages": {
+      "get": {
+        "tags": ["Dashboard"],
+        "summary": "List Packages",
+        "description": "Retrieve available credit packages for purchase.",
+        "operationId": "listPackages",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PackageListResponse" }
+              }
+            }
           }
         }
       }
@@ -154,55 +1117,536 @@
   },
   "components": {
     "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
+      "SuccessResponse": {
         "type": "object",
         "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
+          "success": { "type": "boolean", "example": true },
+          "message": { "type": "string" }
+        }
+      },
+      "QuickSendResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean", "example": true },
+          "message": { "type": "string", "example": "SMS campaign created successfully" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "campaign_id": { "type": "string", "format": "uuid", "example": "d02628f5-c30b-4f7d-9a76-da4636ee4af9" },
+              "status": { "type": "string", "example": "sent" },
+              "network": { "type": "string", "example": "MTN" },
+              "scheduled_at": { "type": "string", "nullable": true, "example": null }
+            }
           }
         }
       },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
+      "PaginationMeta": {
+        "type": "object",
+        "properties": {
+          "current_page": { "type": "integer" },
+          "per_page": { "type": "integer" },
+          "total": { "type": "integer" },
+          "last_page": { "type": "integer" },
+          "from": { "type": "integer" },
+          "to": { "type": "integer" }
+        }
+      },
+      "SmsCampaign": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "uuid": { "type": "string", "format": "uuid" },
+          "name": { "type": "string" },
+          "total_recipients": { "type": "integer" },
+          "messages_sent": { "type": "integer" },
+          "credits_used": { "type": "string" },
+          "sender_id": { "type": "string" },
+          "status": { "type": "string", "enum": ["pending", "processing", "completed", "failed"] },
+          "scheduled_at": { "type": "string", "format": "date-time", "nullable": true },
+          "is_recurring": { "type": "boolean" },
+          "recurrence_frequency": { "type": "string", "enum": ["daily", "weekly", "monthly"] },
+          "recurrence_interval": { "type": "integer" },
+          "recurrence_ends_at": { "type": "string", "format": "date-time", "nullable": true },
+          "started_at": { "type": "string", "format": "date-time", "nullable": true },
+          "ended_at": { "type": "string", "format": "date-time", "nullable": true },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "SmsCampaignListResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": {
             "type": "object",
             "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
+              "data": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/SmsCampaign" }
+              },
+              "current_page": { "type": "integer" },
+              "per_page": { "type": "integer" },
+              "total": { "type": "integer" },
+              "last_page": { "type": "integer" }
+            }
+          }
+        }
+      },
+      "SmsCampaignResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "$ref": "#/components/schemas/SmsCampaign" }
+        }
+      },
+      "CreateSmsCampaignRequest": {
+        "type": "object",
+        "required": ["name", "sender_id", "message"],
+        "properties": {
+          "name": { "type": "string", "description": "Campaign name", "example": "Campaign Name" },
+          "recipients": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Array of phone numbers (international, local, or with + prefix)",
+            "example": ["233241234567", "233501234567"]
+          },
+          "group_ids": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Array of group IDs to target",
+            "example": ["245079"]
+          },
+          "sender_id": { "type": "string", "description": "Approved sender ID", "example": "SIRATEQ GH" },
+          "message": { "type": "string", "description": "Message content", "example": "Hello, this is a test message" },
+          "scheduled_at": { "type": "string", "format": "date-time", "description": "Schedule time (optional)", "example": "2026-01-10 14:30:00" },
+          "is_recurring": { "type": "boolean", "description": "Enable recurring campaign", "example": true },
+          "recurrence_frequency": { "type": "string", "enum": ["daily", "weekly", "monthly"], "example": "weekly" },
+          "recurrence_interval": { "type": "integer", "description": "Interval between recurrences", "example": 1 },
+          "recurrence_ends_at": { "type": "string", "format": "date-time", "example": "2026-02-28 23:59:59" }
+        }
+      },
+      "VoiceCampaign": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "uuid": { "type": "string", "format": "uuid" },
+          "name": { "type": "string" },
+          "total_recipients": { "type": "integer" },
+          "messages_sent": { "type": "integer" },
+          "credits_used": { "type": "string" },
+          "status": { "type": "string", "enum": ["pending", "processing", "completed", "failed"] },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "VoiceCampaignListResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/VoiceCampaign" }
               }
             }
           }
-        ]
+        }
       },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
+      "VoiceCampaignResponse": {
         "type": "object",
         "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
+          "success": { "type": "boolean" },
+          "data": { "$ref": "#/components/schemas/VoiceCampaign" }
+        }
+      },
+      "CreateVoiceCampaignRequest": {
+        "type": "object",
+        "required": ["name", "sender_id"],
+        "properties": {
+          "name": { "type": "string", "description": "Campaign name" },
+          "recipients": { "type": "array", "items": { "type": "string" }, "description": "Array of phone numbers" },
+          "group_ids": { "type": "array", "items": { "type": "string" }, "description": "Array of group UUIDs" },
+          "sender_id": { "type": "string", "description": "Approved sender ID" },
+          "audio": { "type": "string", "format": "binary", "description": "Audio file (MP3, WAV, OGG). Either audio or message required." },
+          "message": { "type": "string", "description": "Text for text-to-speech. Either audio or message required." },
+          "scheduled_at": { "type": "string", "format": "date-time" },
+          "is_recurring": { "type": "boolean" },
+          "recurrence_frequency": { "type": "string", "enum": ["daily", "weekly", "monthly"] },
+          "recurrence_interval": { "type": "integer" },
+          "recurrence_ends_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "CampaignRecipientsResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "type": "array", "items": { "type": "object" } }
+        }
+      },
+      "Contact": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "phone_number": { "type": "string" },
+          "first_name": { "type": "string" },
+          "last_name": { "type": "string" },
+          "email": { "type": "string" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "ContactListResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "data": { "type": "array", "items": { "$ref": "#/components/schemas/Contact" } }
+            }
+          }
+        }
+      },
+      "ContactResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "$ref": "#/components/schemas/Contact" }
+        }
+      },
+      "CreateContactRequest": {
+        "type": "object",
+        "required": ["phone_number"],
+        "properties": {
+          "phone_number": { "type": "string" },
+          "first_name": { "type": "string" },
+          "last_name": { "type": "string" },
+          "email": { "type": "string" }
+        }
+      },
+      "BulkAssignGroupRequest": {
+        "type": "object",
+        "required": ["contact_ids", "group_ids"],
+        "properties": {
+          "contact_ids": {
+            "type": "array",
+            "items": { "type": "string" },
+            "example": ["1"]
           },
-          "message": {
-            "type": "string"
+          "group_ids": {
+            "type": "array",
+            "items": { "type": "string" },
+            "example": ["ee9fb0b4-83f0-4be5-a0be-1063e05ff0b8", "feab58b8-df74-435e-ae09-d7dde096ff0c"]
+          }
+        }
+      },
+      "Group": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "uuid": { "type": "string", "format": "uuid" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "contacts_count": { "type": "integer" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "GroupListResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "data": { "type": "array", "items": { "$ref": "#/components/schemas/Group" } }
+            }
+          }
+        }
+      },
+      "AllGroupsResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "type": "array", "items": { "$ref": "#/components/schemas/Group" } }
+        }
+      },
+      "GroupResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "$ref": "#/components/schemas/Group" }
+        }
+      },
+      "CreateGroupRequest": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string", "example": "test" },
+          "description": { "type": "string", "example": "test" }
+        }
+      },
+      "UpdateGroupRequest": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      },
+      "SenderId": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "uuid": { "type": "string", "format": "uuid" },
+          "sender_id": { "type": "string" },
+          "purpose": { "type": "string" },
+          "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "SenderIdListResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "type": "array", "items": { "$ref": "#/components/schemas/SenderId" } }
+        }
+      },
+      "ApprovedSenderIdListResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { 
+            "type": "array", 
+            "items": { "type": "string" },
+            "description": "Simple array of approved sender ID names",
+            "example": ["MYCOMPANY", "ALERTS", "PROMO"]
+          }
+        }
+      },
+      "SenderIdResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "$ref": "#/components/schemas/SenderId" }
+        }
+      },
+      "CreateSenderIdRequest": {
+        "type": "object",
+        "required": ["sender_id", "purpose"],
+        "properties": {
+          "sender_id": { "type": "string", "example": "test" },
+          "purpose": { "type": "string", "example": "test" }
+        }
+      },
+      "MessageTemplate": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "uuid": { "type": "string", "format": "uuid" },
+          "name": { "type": "string" },
+          "content": { "type": "string" },
+          "type": { "type": "string", "enum": ["sms", "voice"] },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "MessageTemplateListResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "type": "array", "items": { "$ref": "#/components/schemas/MessageTemplate" } }
+        }
+      },
+      "MessageTemplateResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "$ref": "#/components/schemas/MessageTemplate" }
+        }
+      },
+      "CreateMessageTemplateRequest": {
+        "type": "object",
+        "required": ["name", "content", "type"],
+        "properties": {
+          "name": { "type": "string", "example": "test" },
+          "content": { "type": "string", "description": "Template content with optional placeholders", "example": "test, [First Name]" },
+          "type": { "type": "string", "enum": ["sms", "voice"], "example": "sms" }
+        }
+      },
+      "UpdateMessageTemplateRequest": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "content": { "type": "string" },
+          "type": { "type": "string", "enum": ["sms", "voice"] }
+        }
+      },
+      "BalanceResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "balance": { "type": "number" },
+              "credits": { "type": "number" }
+            }
+          }
+        }
+      },
+      "DeductionsResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "type": "array", "items": { "type": "object" } }
+        }
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "uuid": { "type": "string", "format": "uuid" },
+          "type": { "type": "string" },
+          "amount": { "type": "number" },
+          "status": { "type": "string" },
+          "created_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "TransactionListResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "type": "array", "items": { "$ref": "#/components/schemas/Transaction" } }
+        }
+      },
+      "TransactionResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "$ref": "#/components/schemas/Transaction" }
+        }
+      },
+      "BundleHistory": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "package_name": { "type": "string" },
+          "credits": { "type": "number" },
+          "amount": { "type": "number" },
+          "created_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "BundleHistoryListResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "type": "array", "items": { "$ref": "#/components/schemas/BundleHistory" } }
+        }
+      },
+      "BundleHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "$ref": "#/components/schemas/BundleHistory" }
+        }
+      },
+      "ApiKey": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "uuid": { "type": "string", "format": "uuid" },
+          "key": { "type": "string" },
+          "status": { "type": "string", "enum": ["active", "inactive"] },
+          "last_used_at": { "type": "string", "format": "date-time", "nullable": true },
+          "created_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "ApiKeyListResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "type": "array", "items": { "$ref": "#/components/schemas/ApiKey" } }
+        }
+      },
+      "ApiKeyResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "$ref": "#/components/schemas/ApiKey" }
+        }
+      },
+      "PaymentVerificationResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "status": { "type": "string" },
+              "amount": { "type": "number" },
+              "reference": { "type": "string" }
+            }
+          }
+        }
+      },
+      "Package": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "name": { "type": "string" },
+          "credits": { "type": "number" },
+          "price": { "type": "number" }
+        }
+      },
+      "PackageListResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": { "type": "array", "items": { "$ref": "#/components/schemas/Package" } }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean", "example": false },
+          "message": { "type": "string" },
+          "errors": { "type": "object" }
+        }
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Unauthorized - Invalid or missing authentication token",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Resource not found",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" }
+          }
+        }
+      },
+      "ValidationError": {
+        "description": "Validation error",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" }
           }
         }
       }
@@ -210,7 +1654,8 @@
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "description": "Enter your API token"
       }
     }
   }

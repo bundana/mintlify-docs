@@ -1,0 +1,36 @@
+---
+title: "List Voice Campaigns"
+api: "GET /voice-campaigns"
+description: "Returns a paginated list of all voice campaigns for the authenticated user"
+---
+
+<ParamField query="page" type="integer" default="1">
+  Page number for pagination
+</ParamField>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": {
+    "current_page": 1,
+    "data": [
+      {
+        "id": 1,
+        "uuid": "8b915918-14d6-4c2a-a2cf-f6c3d8dbd845",
+        "name": "Voice Announcement",
+        "total_recipients": 50,
+        "messages_sent": 45,
+        "credits_used": "90.00",
+        "status": "completed",
+        "created_at": "2026-01-01T10:00:00.000000Z",
+        "updated_at": "2026-01-01T10:30:00.000000Z"
+      }
+    ],
+    "per_page": 10,
+    "total": 1,
+    "last_page": 1
+  }
+}
+```
+</ResponseExample>

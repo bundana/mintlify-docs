@@ -1,0 +1,49 @@
+---
+title: "Create Group"
+api: "POST /groups"
+description: "Create a new contact group"
+---
+
+<ParamField body="name" type="string" required>
+  Name of the group
+</ParamField>
+
+<ParamField body="description" type="string">
+  Description of the group
+</ParamField>
+
+<RequestExample>
+```json Create Group
+{
+  "name": "VIP Customers",
+  "description": "High-value customers for premium campaigns"
+}
+```
+</RequestExample>
+
+<ResponseExample>
+```json 201 - Created
+{
+  "success": true,
+  "data": {
+    "id": 3,
+    "uuid": "66dbf9ca-112a-4c66-b5ad-0069f277c1b9",
+    "name": "VIP Customers",
+    "description": "High-value customers for premium campaigns",
+    "contacts_count": 0,
+    "created_at": "2026-01-15T12:00:00.000000Z",
+    "updated_at": "2026-01-15T12:00:00.000000Z"
+  }
+}
+```
+
+```json 422 - Validation Error
+{
+  "success": false,
+  "message": "The given data was invalid.",
+  "errors": {
+    "name": ["The name field is required."]
+  }
+}
+```
+</ResponseExample>

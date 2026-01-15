@@ -1,0 +1,126 @@
+---
+title: "Create SMS Campaign"
+api: "POST /sms-campaigns"
+description: "Create a new SMS campaign to send messages to your contacts"
+---
+
+<ParamField body="name" type="string" required>
+  Name of the campaign for identification
+</ParamField>
+
+<ParamField body="recipients" type="array">
+  Array of phone numbers (international, local, or with + prefix). Either `recipients` or `group_ids` must be provided.
+</ParamField>
+
+<ParamField body="group_ids" type="array">
+  Array of group UUIDs to target. Either `recipients` or `group_ids` must be provided.
+</ParamField>
+
+<ParamField body="sender_id" type="string" required>
+  Your approved sender ID
+</ParamField>
+
+<ParamField body="message" type="string" required>
+  The message content to send. You can use placeholders like `[First Name]` for personalization.
+</ParamField>
+
+<ParamField body="scheduled_at" type="string">
+  Schedule the campaign for a future time. Format: `YYYY-MM-DD HH:MM:SS`
+</ParamField>
+
+<ParamField body="is_recurring" type="boolean" default="false">
+  Enable recurring campaign
+</ParamField>
+
+<ParamField body="recurrence_frequency" type="string">
+  Frequency of recurrence: `daily`, `weekly`, or `monthly`
+</ParamField>
+
+<ParamField body="recurrence_interval" type="integer" default="1">
+  Interval between recurrences (e.g., every 2 weeks)
+</ParamField>
+
+<ParamField body="recurrence_ends_at" type="string">
+  End date for recurring campaign. Format: `YYYY-MM-DD HH:MM:SS`
+</ParamField>
+
+<RequestExample>
+```json Send to Recipients
+{
+  "name": "Welcome Campaign",
+  "recipients": [
+    "233241234567",
+    "233501234567"
+  ],
+  "sender_id": "MYCOMPANY",
+  "message": "Hello! Welcome to our service."
+}
+```
+
+```json Send to Groups
+{
+  "name": "Group Campaign",
+  "group_ids": [
+    "ee9fb0b4-83f0-4be5-a0be-1063e05ff0b8"
+  ],
+  "sender_id": "MYCOMPANY",
+  "message": "Hello [First Name]! Check out our new offers."
+}
+```
+
+```json Scheduled Campaign
+{
+  "name": "Scheduled Campaign",
+  "recipients": ["233241234567"],
+  "sender_id": "MYCOMPANY",
+  "message": "This is a scheduled message!",
+  "scheduled_at": "2026-01-15 14:30:00"
+}
+```
+
+```json Recurring Campaign
+{
+  "name": "Weekly Newsletter",
+  "group_ids": ["ee9fb0b4-83f0-4be5-a0be-1063e05ff0b8"],
+  "sender_id": "MYCOMPANY",
+  "message": "Weekly update from our team!",
+  "is_recurring": true,
+  "recurrence_frequency": "weekly",
+  "recurrence_interval": 1,
+  "recurrence_ends_at": "2026-12-31 23:59:59"
+}
+```
+</RequestExample>
+
+<ResponseExample>
+```json 201 - Created
+{
+  "success": true,
+  "data": {
+    "id": 4,
+    "uuid": "d7c3f89d-fe97-4d47-907c-g53ec363e78e",
+    "name": "Welcome Campaign",
+    "total_recipients": 2,
+    "messages_sent": 0,
+    "credits_used": "0.00",
+    "sender_id": "MYCOMPANY",
+    "status": "pending",
+    "scheduled_at": null,
+    "is_recurring": false,
+    "created_at": "2026-01-15T10:30:00.000000Z",
+    "updated_at": "2026-01-15T10:30:00.000000Z"
+  }
+}
+```
+
+```json 422 - Validation Error
+{
+  "success": false,
+  "message": "The given data was invalid.",
+  "errors": {
+    "sender_id": ["The selected sender id is invalid."],
+    "message": ["The message field is required."]
+  }
+}
+```
+</ResponseExample>

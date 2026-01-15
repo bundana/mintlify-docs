@@ -1,0 +1,55 @@
+---
+title: "List SMS Campaigns"
+api: "GET /sms-campaigns"
+description: "Returns a paginated list of all SMS campaigns for the authenticated user"
+---
+
+<ParamField query="page" type="integer" default="1">
+  Page number for pagination
+</ParamField>
+
+<ParamField query="per_page" type="integer" default="10">
+  Number of items per page
+</ParamField>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": {
+    "current_page": 1,
+    "data": [
+      {
+        "id": 3,
+        "uuid": "c6c2f78c-fd96-4c46-806b-f42db252d67d",
+        "name": "test",
+        "total_recipients": 1,
+        "messages_sent": 0,
+        "credits_used": "0.00",
+        "sender_id": "SIRATEQ GH",
+        "created_at": "2026-01-01T01:37:19.000000Z",
+        "updated_at": "2026-01-01T01:37:25.000000Z",
+        "scheduled_at": null,
+        "status": "failed",
+        "is_recurring": false,
+        "recurrence_frequency": "daily",
+        "recurrence_interval": 1,
+        "recurrence_ends_at": null,
+        "started_at": null,
+        "ended_at": "2026-01-01 01:37:25"
+      }
+    ],
+    "first_page_url": "https://sendazi.com/api/v1/sms-campaigns?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "https://sendazi.com/api/v1/sms-campaigns?page=1",
+    "next_page_url": null,
+    "path": "https://sendazi.com/api/v1/sms-campaigns",
+    "per_page": 10,
+    "prev_page_url": null,
+    "to": 3,
+    "total": 3
+  }
+}
+```
+</ResponseExample>

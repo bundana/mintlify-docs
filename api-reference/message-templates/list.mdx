@@ -1,0 +1,33 @@
+---
+title: "List Message Templates"
+api: "GET /message-templates"
+description: "Returns all message templates"
+---
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "uuid": "15c981c3-ae58-45b0-8958-39cfbcbe943e",
+      "name": "Welcome Message",
+      "content": "Hello [First Name]! Welcome to our service.",
+      "type": "sms",
+      "created_at": "2026-01-01T00:00:00.000000Z",
+      "updated_at": "2026-01-01T00:00:00.000000Z"
+    },
+    {
+      "id": 2,
+      "uuid": "5ef2c8c8-e62d-4c43-9b59-09f2173da81a",
+      "name": "Order Confirmation",
+      "content": "Hi [First Name], your order #[Order ID] has been confirmed!",
+      "type": "sms",
+      "created_at": "2026-01-02T00:00:00.000000Z",
+      "updated_at": "2026-01-02T00:00:00.000000Z"
+    }
+  ]
+}
+```
+</ResponseExample>

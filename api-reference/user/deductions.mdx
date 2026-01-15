@@ -1,0 +1,31 @@
+---
+title: "Get Deductions"
+api: "GET /user/deductions"
+description: "Retrieve the list of credit deductions from campaigns"
+---
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "campaign_name": "Welcome Campaign",
+      "campaign_type": "sms",
+      "credits_used": 150,
+      "messages_sent": 150,
+      "created_at": "2026-01-10T00:00:00.000000Z"
+    },
+    {
+      "id": 2,
+      "campaign_name": "Voice Announcement",
+      "campaign_type": "voice",
+      "credits_used": 200,
+      "messages_sent": 100,
+      "created_at": "2026-01-12T00:00:00.000000Z"
+    }
+  ]
+}
+```
+</ResponseExample>

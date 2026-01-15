@@ -1,0 +1,40 @@
+---
+title: "Get Voice Campaign Recipients"
+api: "GET /voice-campaigns/{uuid}/recipients"
+description: "Retrieve the list of recipients for a specific voice campaign"
+---
+
+<ParamField path="uuid" type="string" required>
+  The unique identifier (UUID) of the campaign
+</ParamField>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "phone_number": "233241234567",
+      "status": "answered",
+      "called_at": "2026-01-01T10:05:00.000000Z",
+      "duration": 30
+    },
+    {
+      "id": 2,
+      "phone_number": "233501234567",
+      "status": "no_answer",
+      "called_at": "2026-01-01T10:06:00.000000Z",
+      "duration": 0
+    }
+  ]
+}
+```
+
+```json 404 - Not Found
+{
+  "success": false,
+  "message": "Campaign not found."
+}
+```
+</ResponseExample>

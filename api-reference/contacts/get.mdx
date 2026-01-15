@@ -1,0 +1,40 @@
+---
+title: "Get Contact"
+api: "GET /contacts/{id}"
+description: "Retrieve a specific contact by ID"
+---
+
+<ParamField path="id" type="integer" required>
+  The contact ID
+</ParamField>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "phone_number": "233241234567",
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john@example.com",
+    "groups": [
+      {
+        "id": 1,
+        "uuid": "ee9fb0b4-83f0-4be5-a0be-1063e05ff0b8",
+        "name": "VIP Customers"
+      }
+    ],
+    "created_at": "2026-01-01T00:00:00.000000Z",
+    "updated_at": "2026-01-01T00:00:00.000000Z"
+  }
+}
+```
+
+```json 404 - Not Found
+{
+  "success": false,
+  "message": "Contact not found."
+}
+```
+</ResponseExample>

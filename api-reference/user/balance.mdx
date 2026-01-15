@@ -1,0 +1,18 @@
+---
+title: "Get Account Balance"
+api: "GET /user/balance"
+description: "Retrieve the current account balance and credit information"
+---
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": {
+    "balance": 1500.00,
+    "credits": 7500,
+    "currency": "GHS"
+  }
+}
+```
+</ResponseExample>

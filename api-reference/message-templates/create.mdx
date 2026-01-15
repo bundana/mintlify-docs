@@ -1,0 +1,71 @@
+---
+title: "Create Message Template"
+api: "POST /message-templates"
+description: "Create a new message template with optional placeholders"
+---
+
+<ParamField body="name" type="string" required>
+  Name of the template for identification
+</ParamField>
+
+<ParamField body="content" type="string" required>
+  Template content. Supports placeholders like `[First Name]`, `[Last Name]`, etc.
+</ParamField>
+
+<ParamField body="type" type="string" required>
+  Template type: `sms` or `voice`
+</ParamField>
+
+## Available Placeholders
+
+| Placeholder | Description |
+|------------|-------------|
+| `[First Name]` | Contact's first name |
+| `[Last Name]` | Contact's last name |
+| `[Phone Number]` | Contact's phone number |
+| `[Email]` | Contact's email address |
+
+<RequestExample>
+```json SMS Template
+{
+  "name": "Welcome Message",
+  "content": "Hello [First Name]! Welcome to our service. Reply STOP to unsubscribe.",
+  "type": "sms"
+}
+```
+
+```json Voice Template
+{
+  "name": "Appointment Reminder",
+  "content": "Hello [First Name], this is a reminder about your appointment tomorrow.",
+  "type": "voice"
+}
+```
+</RequestExample>
+
+<ResponseExample>
+```json 201 - Created
+{
+  "success": true,
+  "data": {
+    "id": 3,
+    "uuid": "6fg3d9d9-f73e-5d54-0c60-10g3284eb92b",
+    "name": "Welcome Message",
+    "content": "Hello [First Name]! Welcome to our service. Reply STOP to unsubscribe.",
+    "type": "sms",
+    "created_at": "2026-01-15T14:00:00.000000Z",
+    "updated_at": "2026-01-15T14:00:00.000000Z"
+  }
+}
+```
+
+```json 422 - Validation Error
+{
+  "success": false,
+  "message": "The given data was invalid.",
+  "errors": {
+    "type": ["The selected type is invalid."]
+  }
+}
+```
+</ResponseExample>

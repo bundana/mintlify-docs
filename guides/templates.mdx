@@ -1,0 +1,113 @@
+---
+title: "Message Templates"
+description: "Create reusable message templates with dynamic placeholders"
+---
+
+## Overview
+
+Message templates help you create reusable messages with dynamic placeholders for personalization. Instead of writing the same message repeatedly, create a template once and use it across multiple campaigns.
+
+## Creating Templates
+
+### Basic Template
+
+```json
+{
+  "name": "Welcome Message",
+  "content": "Hello [First Name]! Welcome to our service.",
+  "type": "sms"
+}
+```
+
+### Template with Multiple Placeholders
+
+```json
+{
+  "name": "Order Confirmation",
+  "content": "Hi [First Name], your order has been confirmed. We'll deliver to your registered phone number [Phone Number].",
+  "type": "sms"
+}
+```
+
+## Available Placeholders
+
+| Placeholder | Description | Example Output |
+|------------|-------------|----------------|
+| `[First Name]` | Contact's first name | "John" |
+| `[Last Name]` | Contact's last name | "Doe" |
+| `[Phone Number]` | Contact's phone number | "233241234567" |
+| `[Email]` | Contact's email | "john@example.com" |
+
+## Template Types
+
+<CardGroup cols={2}>
+  <Card title="SMS Templates" icon="message">
+    Text message templates for SMS campaigns
+  </Card>
+  <Card title="Voice Templates" icon="phone">
+    Script templates for voice campaigns (text-to-speech)
+  </Card>
+</CardGroup>
+
+## Use Cases
+
+<AccordionGroup>
+  <Accordion title="Welcome Messages">
+    Greet new customers with a personalized welcome message.
+    
+    ```
+    Hello [First Name]! Welcome to MYCOMPANY. 
+    Reply HELP for assistance.
+    ```
+  </Accordion>
+  
+  <Accordion title="Order Notifications">
+    Keep customers informed about their orders.
+    
+    ```
+    Hi [First Name], your order #12345 is on its way! 
+    Track it at mycompany.com/track
+    ```
+  </Accordion>
+  
+  <Accordion title="Appointment Reminders">
+    Reduce no-shows with automated reminders.
+    
+    ```
+    Hi [First Name], this is a reminder about your 
+    appointment tomorrow at 10:00 AM.
+    ```
+  </Accordion>
+  
+  <Accordion title="Promotional Messages">
+    Send targeted promotions to your customers.
+    
+    ```
+    [First Name], exclusive offer just for you! 
+    Get 20% off your next purchase. Use code: SAVE20
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Best Practices
+
+<Tip>
+  **Test your templates**: Always send a test message to verify placeholders are working correctly before launching a campaign.
+</Tip>
+
+<Warning>
+  **Character limits**: SMS messages are limited to 160 characters per segment. Plan your templates accordingly.
+</Warning>
+
+### Template Writing Tips
+
+1. **Keep it concise**: Get to the point quickly
+2. **Include a call-to-action**: Tell recipients what to do next
+3. **Add opt-out info**: Include unsubscribe instructions for marketing messages
+4. **Avoid special characters**: Some characters may not display correctly on all phones
+
+## API Reference
+
+<Card title="Message Templates API" icon="file-lines" href="/api-reference/message-templates/list">
+  Create and manage templates programmatically
+</Card>

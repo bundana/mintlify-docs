@@ -1,0 +1,43 @@
+---
+title: "Get SMS Campaign"
+api: "GET /sms-campaigns/{uuid}"
+description: "Retrieve details of a specific SMS campaign"
+---
+
+<ParamField path="uuid" type="string" required>
+  The unique identifier (UUID) of the campaign
+</ParamField>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": {
+    "id": 3,
+    "uuid": "c6c2f78c-fd96-4c46-806b-f42db252d67d",
+    "name": "test",
+    "total_recipients": 1,
+    "messages_sent": 0,
+    "credits_used": "0.00",
+    "sender_id": "SIRATEQ GH",
+    "created_at": "2026-01-01T01:37:19.000000Z",
+    "updated_at": "2026-01-01T01:37:25.000000Z",
+    "scheduled_at": null,
+    "status": "failed",
+    "is_recurring": false,
+    "recurrence_frequency": "daily",
+    "recurrence_interval": 1,
+    "recurrence_ends_at": null,
+    "started_at": null,
+    "ended_at": "2026-01-01 01:37:25"
+  }
+}
+```
+
+```json 404 - Not Found
+{
+  "success": false,
+  "message": "Campaign not found."
+}
+```
+</ResponseExample>

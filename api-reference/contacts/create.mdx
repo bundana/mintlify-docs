@@ -1,0 +1,59 @@
+---
+title: "Create Contact"
+api: "POST /contacts"
+description: "Create a new contact"
+---
+
+<ParamField body="phone_number" type="string" required>
+  Phone number (international, local, or with + prefix). Local numbers are auto-converted.
+</ParamField>
+
+<ParamField body="first_name" type="string">
+  Contact's first name
+</ParamField>
+
+<ParamField body="last_name" type="string">
+  Contact's last name
+</ParamField>
+
+<ParamField body="email" type="string">
+  Contact's email address
+</ParamField>
+
+<RequestExample>
+```json Create Contact
+{
+  "phone_number": "233241234567",
+  "first_name": "John",
+  "last_name": "Doe",
+  "email": "john@example.com"
+}
+```
+</RequestExample>
+
+<ResponseExample>
+```json 201 - Created
+{
+  "success": true,
+  "data": {
+    "id": 3,
+    "phone_number": "233241234567",
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john@example.com",
+    "created_at": "2026-01-15T12:00:00.000000Z",
+    "updated_at": "2026-01-15T12:00:00.000000Z"
+  }
+}
+```
+
+```json 422 - Validation Error
+{
+  "success": false,
+  "message": "The given data was invalid.",
+  "errors": {
+    "phone_number": ["The phone number has already been taken."]
+  }
+}
+```
+</ResponseExample>

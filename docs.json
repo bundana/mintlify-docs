@@ -1,68 +1,130 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Sendazi",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#6366F1",
+    "light": "#818CF8",
+    "dark": "#4F46E5"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Getting Started",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              "quickstart"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Core Concepts",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "guides/campaigns",
+              "guides/contacts",
+              "guides/sender-ids",
+              "guides/templates"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "API Reference",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Overview",
             "pages": [
               "api-reference/introduction"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "SMS Campaigns",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/sms-campaigns/quick-send",
+              "api-reference/sms-campaigns/list",
+              "api-reference/sms-campaigns/create",
+              "api-reference/sms-campaigns/get",
+              "api-reference/sms-campaigns/recipients"
+            ]
+          },
+          {
+            "group": "Voice Campaigns",
+            "pages": [
+              "api-reference/voice-campaigns/list",
+              "api-reference/voice-campaigns/create",
+              "api-reference/voice-campaigns/get",
+              "api-reference/voice-campaigns/recipients"
+            ]
+          },
+          {
+            "group": "Contacts",
+            "pages": [
+              "api-reference/contacts/list",
+              "api-reference/contacts/create",
+              "api-reference/contacts/get",
+              "api-reference/contacts/assign-groups"
+            ]
+          },
+          {
+            "group": "Groups",
+            "pages": [
+              "api-reference/groups/list",
+              "api-reference/groups/list-all",
+              "api-reference/groups/create",
+              "api-reference/groups/get",
+              "api-reference/groups/update",
+              "api-reference/groups/delete"
+            ]
+          },
+          {
+            "group": "Sender IDs",
+            "pages": [
+              "api-reference/sender-ids/list",
+              "api-reference/sender-ids/list-approved",
+              "api-reference/sender-ids/create",
+              "api-reference/sender-ids/get",
+              "api-reference/sender-ids/delete"
+            ]
+          },
+          {
+            "group": "Message Templates",
+            "pages": [
+              "api-reference/message-templates/list",
+              "api-reference/message-templates/create",
+              "api-reference/message-templates/get",
+              "api-reference/message-templates/update",
+              "api-reference/message-templates/delete"
+            ]
+          },
+          {
+            "group": "Account",
+            "pages": [
+              "api-reference/user/balance",
+              "api-reference/user/deductions",
+              "api-reference/user/transactions",
+              "api-reference/user/transaction",
+              "api-reference/user/bundle-history",
+              "api-reference/user/bundle-history-item"
+            ]
+          },
+          {
+            "group": "API Keys",
+            "pages": [
+              "api-reference/api-keys/list",
+              "api-reference/api-keys/generate",
+              "api-reference/api-keys/get",
+              "api-reference/api-keys/change-status",
+              "api-reference/api-keys/delete"
+            ]
+          },
+          {
+            "group": "Payments",
+            "pages": [
+              "api-reference/payments/verify",
+              "api-reference/dashboard/packages"
             ]
           }
         ]
@@ -71,14 +133,14 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "API Status",
+          "href": "https://status.sendazi.com",
+          "icon": "signal"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Support",
+          "href": "mailto:support@sendazi.com",
+          "icon": "envelope"
         }
       ]
     }
@@ -91,32 +153,31 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@sendazi.com"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "href": "https://sendazi.com"
     }
   },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+  "api": {
+    "baseUrl": "https://sendazi.com/api/v1",
+    "auth": {
+      "method": "bearer",
+      "name": "Authorization"
+    },
+    "playground": {
+      "mode": "simple"
+    }
   },
+  "openapi": "api-reference/openapi.json",
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/sendazi",
+      "github": "https://github.com/sendazi",
+      "linkedin": "https://linkedin.com/company/sendazi"
     }
   }
 }

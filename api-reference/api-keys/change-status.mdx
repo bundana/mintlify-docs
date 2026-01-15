@@ -1,0 +1,52 @@
+---
+title: "Change API Key Status"
+api: "POST /api-keys/{uuid}/change-status"
+description: "Enable or disable an API key"
+---
+
+<ParamField path="uuid" type="string" required>
+  The unique identifier (UUID) of the API key
+</ParamField>
+
+<Note>
+  Disabled API keys cannot be used for authentication. You can re-enable them at any time.
+</Note>
+
+<ResponseExample>
+```json 200 - Success (Disabled)
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "uuid": "f2ed33fd-e4fe-435e-8536-f5f98a155c37",
+    "key": "sk_live_*****************************",
+    "status": "inactive",
+    "last_used_at": "2026-01-15T10:00:00.000000Z",
+    "created_at": "2026-01-01T00:00:00.000000Z"
+  },
+  "message": "API key disabled successfully."
+}
+```
+
+```json 200 - Success (Enabled)
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "uuid": "f2ed33fd-e4fe-435e-8536-f5f98a155c37",
+    "key": "sk_live_*****************************",
+    "status": "active",
+    "last_used_at": "2026-01-15T10:00:00.000000Z",
+    "created_at": "2026-01-01T00:00:00.000000Z"
+  },
+  "message": "API key enabled successfully."
+}
+```
+
+```json 404 - Not Found
+{
+  "success": false,
+  "message": "API key not found."
+}
+```
+</ResponseExample>

@@ -1,0 +1,26 @@
+---
+title: "Generate API Key"
+api: "POST /api-keys"
+description: "Generate a new API key"
+---
+
+<Warning>
+  The full API key is only shown once when generated. Make sure to copy and store it securely.
+</Warning>
+
+<ResponseExample>
+```json 201 - Created
+{
+  "success": true,
+  "data": {
+    "id": 3,
+    "uuid": "4b6406ff-e2e4-4343-8879-44374e8552fe",
+    "key": "sk_live_abc123def456ghi789jkl012mno345pqr678",
+    "status": "active",
+    "last_used_at": null,
+    "created_at": "2026-01-15T15:00:00.000000Z"
+  },
+  "message": "API key generated successfully. Please copy and store it securely."
+}
+```
+</ResponseExample>

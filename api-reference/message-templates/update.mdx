@@ -1,0 +1,55 @@
+---
+title: "Update Message Template"
+api: "PUT /message-templates/{uuid}"
+description: "Update an existing message template"
+---
+
+<ParamField path="uuid" type="string" required>
+  The unique identifier (UUID) of the template
+</ParamField>
+
+<ParamField body="name" type="string">
+  New name for the template
+</ParamField>
+
+<ParamField body="content" type="string">
+  New content for the template
+</ParamField>
+
+<ParamField body="type" type="string">
+  New type: `sms` or `voice`
+</ParamField>
+
+<RequestExample>
+```json Update Template
+{
+  "name": "Updated Welcome Message",
+  "content": "Hi [First Name]! Thanks for joining us. Reply HELP for assistance.",
+  "type": "sms"
+}
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200 - Success
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "uuid": "15c981c3-ae58-45b0-8958-39cfbcbe943e",
+    "name": "Updated Welcome Message",
+    "content": "Hi [First Name]! Thanks for joining us. Reply HELP for assistance.",
+    "type": "sms",
+    "created_at": "2026-01-01T00:00:00.000000Z",
+    "updated_at": "2026-01-15T14:30:00.000000Z"
+  }
+}
+```
+
+```json 404 - Not Found
+{
+  "success": false,
+  "message": "Template not found."
+}
+```
+</ResponseExample>

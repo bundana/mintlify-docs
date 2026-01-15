@@ -1,33 +1,158 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: "API Introduction"
+sidebarTitle: "Introduction"
+description: "Learn how to integrate with the Sendazi API"
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+## Overview
 
-## Welcome
+The Sendazi API is a RESTful API that allows you to programmatically manage SMS and Voice campaigns, contacts, groups, sender IDs, message templates, and more.
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
-
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
+<Card title="Base URL" icon="globe">
+  ```
+  https://sendazi.com/api/v1
+  ```
 </Card>
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+All API endpoints require authentication using a Bearer token. You can generate API keys from your [dashboard](https://sendazi.com).
+
+Include your API key in the `Authorization` header of every request:
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+<Warning>
+  Keep your API keys secure. Do not share them or expose them in client-side code.
+</Warning>
+
+## Request Format
+
+All requests should include the following headers:
+
+```bash
+Content-Type: application/json
+Authorization: Bearer YOUR_API_KEY
+```
+
+For `POST` and `PUT` requests, send the request body as JSON.
+
+## Response Format
+
+All responses are returned in JSON format with a consistent structure:
+
+### Success Response
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
+{
+  "success": true,
+  "data": {
+    // Response data here
   }
-]
+}
 ```
+
+### Paginated Response
+
+```json
+{
+  "success": true,
+  "data": {
+    "data": [...],
+    "current_page": 1,
+    "per_page": 10,
+    "total": 100,
+    "last_page": 10,
+    "from": 1,
+    "to": 10
+  }
+}
+```
+
+### Error Response
+
+```json
+{
+  "success": false,
+  "message": "Error description",
+  "errors": {
+    "field_name": ["Validation error message"]
+  }
+}
+```
+
+## HTTP Status Codes
+
+| Code | Description |
+|------|-------------|
+| `200` | Success |
+| `201` | Created |
+| `400` | Bad Request |
+| `401` | Unauthorized |
+| `404` | Not Found |
+| `422` | Validation Error |
+| `429` | Too Many Requests |
+| `500` | Internal Server Error |
+
+## Rate Limiting
+
+API requests are rate limited to ensure fair usage. If you exceed the rate limit, you'll receive a `429 Too Many Requests` response.
+
+<Tip>
+  If you need higher rate limits for your use case, contact our support team.
+</Tip>
+
+## Resource Identifiers
+
+Most resources in Sendazi use UUIDs as identifiers. For example:
+
+- Campaigns: `c6c2f78c-fd96-4c46-806b-f42db252d67d`
+- Groups: `ee9fb0b4-83f0-4be5-a0be-1063e05ff0b8`
+- Sender IDs: `71267203-165e-48c9-a163-5aef1a2c6f01`
+
+## Phone Number Format
+
+Phone numbers can be provided in any of these formats:
+
+- ✅ `233241234567` — International format
+- ✅ `0241234567` — Local format (automatically converted to international)
+- ✅ `+233241234567` — With plus prefix
+
+## API Resources
+
+<CardGroup cols={2}>
+  <Card title="SMS Campaigns" icon="message" href="/api-reference/sms-campaigns/list">
+    Create and manage SMS campaigns
+  </Card>
+  <Card title="Voice Campaigns" icon="phone" href="/api-reference/voice-campaigns/list">
+    Create and manage voice campaigns
+  </Card>
+  <Card title="Contacts" icon="users" href="/api-reference/contacts/list">
+    Manage your contact database
+  </Card>
+  <Card title="Groups" icon="layer-group" href="/api-reference/groups/list">
+    Organize contacts into groups
+  </Card>
+  <Card title="Sender IDs" icon="id-card" href="/api-reference/sender-ids/list">
+    Manage your sender IDs
+  </Card>
+  <Card title="Templates" icon="file-lines" href="/api-reference/message-templates/list">
+    Create reusable message templates
+  </Card>
+  <Card title="Account" icon="user" href="/api-reference/user/balance">
+    Manage your account and billing
+  </Card>
+  <Card title="API Keys" icon="key" href="/api-reference/api-keys/list">
+    Generate and manage API keys
+  </Card>
+</CardGroup>
+
+## SDKs & Libraries
+
+We're working on official SDKs for popular programming languages. In the meantime, you can use any HTTP client to interact with our API.
+
+<Note>
+  Need help? Contact our support team at [support@sendazi.com](mailto:support@sendazi.com).
+</Note>
