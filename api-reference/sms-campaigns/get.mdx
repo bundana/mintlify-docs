@@ -5,10 +5,76 @@ description: "Retrieve details of a specific SMS campaign"
 ---
 
 <ParamField path="uuid" type="string" required>
-  The unique identifier (UUID) of the campaign
+The unique identifier (UUID) of the campaign
 </ParamField>
 
+<RequestExample>
+
+```bash cURL
+curl --request GET \
+  --url "https://sendazi.com/api/v1/sms-campaigns/{uuid}" \
+  --header "Authorization: Bearer YOUR_ACCESS_TOKEN"
+```
+
+```php PHP
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+  CURLOPT_URL => "https://sendazi.com/api/v1/sms-campaigns/{uuid}",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_HTTPHEADER => [
+    "Authorization: Bearer YOUR_ACCESS_TOKEN",
+    "Content-Type: application/json"
+  ],
+]);
+
+$response = curl_exec($curl);
+curl_close($curl);
+
+echo $response;
+```
+
+```nodejs Node.js
+const axios = require("axios");
+
+axios.get("https://sendazi.com/api/v1/sms-campaigns/{uuid}", {
+  headers: {
+    Authorization: "Bearer YOUR_ACCESS_TOKEN"
+  }
+})
+.then(res => console.log(res.data))
+.catch(err => console.error(err));
+```
+
+```javascript JavaScript
+fetch("https://sendazi.com/api/v1/sms-campaigns/{uuid}", {
+  headers: {
+    Authorization: "Bearer YOUR_ACCESS_TOKEN"
+  }
+})
+  .then(res => res.json())
+  .then(data => console.log(data));
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://sendazi.com/api/v1/sms-campaigns/{uuid}",
+    headers={
+        "Authorization": "Bearer YOUR_ACCESS_TOKEN"
+    }
+)
+
+print(response.json())
+```
+
+</RequestExample>
+
 <ResponseExample>
+
 ```json 200 - Success
 {
   "success": true,
@@ -40,4 +106,5 @@ description: "Retrieve details of a specific SMS campaign"
   "message": "Campaign not found."
 }
 ```
+
 </ResponseExample>
