@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "maple",
   "name": "Sendazi",
   "colors": {
     "primary": "#6366F1",
@@ -176,7 +176,8 @@
     },
     "playground": {
       "mode": "interactive",
-      "proxy": false
+      "proxy": true,
+      "display": "interactive"
     },
     "examples": {
       "languages": [
@@ -201,5 +202,8 @@
       "github": "https://github.com/sirateq",
       "x-twitter": "https://x.com/sirateqgh"
     }
+  },
+  "seo": {
+    "indexing": "navigable"
   }
 }
