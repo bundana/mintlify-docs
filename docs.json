@@ -169,19 +169,27 @@
     }
   },
   "api": {
-    "baseUrl": "https://sendazi.com/api/v1/v1",
+    "baseUrl": "https://sendazi.com/api/v1",
     "auth": {
       "method": "bearer",
       "name": "Authorization"
     },
     "playground": {
-      "mode": "simple",
+      "mode": "interactive",
       "proxy": false
     },
     "examples": {
-      "languages": ["curl", "php", "python", "javascript", "java", "nodejs", "ruby"],
+      "languages": [
+        "curl",
+        "php",
+        "python",
+        "javascript",
+        "java",
+        "nodejs",
+        "ruby"
+      ],
       "defaults": "required",
-      "prefill": false
+      "prefill": true
     }
   },
   "openapi": "api-reference/openapi.json",
