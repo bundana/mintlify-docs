@@ -12,11 +12,13 @@ description: "Verify a payment transaction"
   Call this endpoint after a successful payment to verify and credit your account.
 </Note>
 
-<ResponseExample>
+<RequestExample>
 ```bash cURL
 curl "https://sendazi.com/api/v1/sms-campaigns/quick?to=233241234567&message=Hello%20from%20Sendazi!&sender_id=MYCOMPANY&api_key=YOUR_API_KEY"
 ```
 
+</RequestExample>
+<ResponseExample>
 ```json 200 - Success
 {
   "success": true,
