@@ -181,7 +181,7 @@
     "examples": {
       "languages": ["curl", "php", "python", "javascript", "java", "nodejs", "ruby"],
       "defaults": "required",
-      "prefill": true
+      "prefill": false
     }
   },
   "openapi": "api-reference/openapi.json",

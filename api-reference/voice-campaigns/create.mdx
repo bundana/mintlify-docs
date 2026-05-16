@@ -62,7 +62,7 @@ description: "Create a new voice campaign to broadcast messages to your contacts
 
 <RequestExample>
 ```bash cURL (with audio file)
-curl -X POST "https://sendazi.com/api/v1/v1/voice-campaigns" \
+curl -X POST "https://sendazi.com/api/v1/voice-campaigns" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -F "name=Audio Announcement" \
   -F "group_ids[]=ee9fb0b4-83f0-4be5-a0be-1063e05ff0b8" \
@@ -71,7 +71,7 @@ curl -X POST "https://sendazi.com/api/v1/v1/voice-campaigns" \
 ```
 
 ```bash cURL (with text-to-speech)
-curl -X POST "https://sendazi.com/api/v1/v1/voice-campaigns" \
+curl -X POST "https://sendazi.com/api/v1/voice-campaigns" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -89,7 +89,7 @@ formData.append('group_ids[]', 'ee9fb0b4-83f0-4be5-a0be-1063e05ff0b8');
 formData.append('sender_id', 'MYCOMPANY');
 formData.append('audio', audioFile); // File object
 
-const response = await fetch('https://sendazi.com/api/v1/v1/voice-campaigns', {
+const response = await fetch('https://sendazi.com/api/v1/voice-campaigns', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer YOUR_API_KEY'
@@ -106,7 +106,7 @@ import requests
 
 with open('/path/to/audio.mp3', 'rb') as audio_file:
     response = requests.post(
-        'https://sendazi.com/api/v1/v1/voice-campaigns',
+        'https://sendazi.com/api/v1/voice-campaigns',
         headers={
             'Authorization': 'Bearer YOUR_API_KEY'
         },
@@ -134,7 +134,7 @@ $postFields = [
 ];
 
 curl_setopt_array($curl, [
-    CURLOPT_URL => 'https://sendazi.com/api/v1/v1/voice-campaigns',
+    CURLOPT_URL => 'https://sendazi.com/api/v1/voice-campaigns',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_POST => true,
     CURLOPT_HTTPHEADER => [
