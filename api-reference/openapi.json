@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://sendazi.com/api/v1",
+      "url": "https://sendazi.com/api/v1/v1",
       "description": "Production server"
     } 
   ],

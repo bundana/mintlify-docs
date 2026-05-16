@@ -169,7 +169,7 @@
     }
   },
   "api": {
-    "baseUrl": "https://sendazi.com/api/v1",
+    "baseUrl": "https://sendazi.com/api/v1/v1",
     "auth": {
       "method": "bearer",
       "name": "Authorization"

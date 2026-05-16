@@ -60,7 +60,7 @@ Changes pushed to the main branch are automatically deployed via the Mintlify Gi
 ## API Base URL
 
 ```
-https://sendazi.com/api/v1
+https://sendazi.com/api/v1/v1
 ```
 
 ## Authentication

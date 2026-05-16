@@ -28,7 +28,7 @@ The Quick Send endpoint is the easiest way to send an SMS. Simply make a GET req
 
 <RequestExample>
 ```bash cURL
-curl "https://sendazi.com/api/v1/sms-campaigns/quick?to=233241234567&message=Hello%20from%20Sendazi!&sender_id=MYCOMPANY&api_key=YOUR_API_KEY"
+curl "https://sendazi.com/api/v1/v1/sms-campaigns/quick?to=233241234567&message=Hello%20from%20Sendazi!&sender_id=MYCOMPANY&api_key=YOUR_API_KEY"
 ```
 
 ```javascript Browser/Node.js
@@ -39,7 +39,7 @@ const params = new URLSearchParams({
   api_key: 'YOUR_API_KEY'
 });
 
-fetch(`https://sendazi.com/api/v1/sms-campaigns/quick?${params}`)
+fetch(`https://sendazi.com/api/v1/v1/sms-campaigns/quick?${params}`)
   .then(res => res.json())
   .then(console.log);
 ```
@@ -48,7 +48,7 @@ fetch(`https://sendazi.com/api/v1/sms-campaigns/quick?${params}`)
 import requests
 
 response = requests.get(
-    'https://sendazi.com/api/v1/sms-campaigns/quick',
+    'https://sendazi.com/api/v1/v1/sms-campaigns/quick',
     params={
         'to': '233241234567',
         'message': 'Hello from Sendazi!',
