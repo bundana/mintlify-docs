@@ -191,7 +191,8 @@
       ],
       "defaults": "required",
       "prefill": true
-    }
+    },
+    "openapi": "sendazi-openai.json"
   },
   "openapi": "api-reference/openapi.json",
   "footer": {
