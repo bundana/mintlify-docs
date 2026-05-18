@@ -168,30 +168,38 @@
       "href": "https://sendazi.com"
     }
   },
-   "api": {
+  "api": {
+    "mdx": {
+      "server": "https://sendazi.com/api/v1"
+    },
     "openapi": "sendazi-openai.json",
     "playground": {
       "display": "simple"
     },
     "params": {
       "expanded": "all",
-      "post": ["nullable", "x-internal"]
+      "post": [
+        "nullable",
+        "x-internal"
+      ]
     },
     "url": "full",
     "examples": {
-      "languages": [ "curl",
+      "languages": [
+        "curl",
         "php",
         "python",
         "javascript",
         "java",
         "nodejs",
-        "ruby"],
+        "ruby"
+      ],
       "defaults": "required",
       "prefill": true,
       "autogenerate": true
-    }   
-  }, 
- "openapi": "sendazi-openai.json",
+    }
+  },
+  "openapi": "sendazi-openai.json",
   "footer": {
     "socials": {
       "facebook": "https://facebook.com/sirateq",
